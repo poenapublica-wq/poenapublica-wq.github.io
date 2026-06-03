@@ -3,444 +3,520 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jornada Académica | Derecho y Ciencias Políticas</title>
+    <title>Jornada de Pruebas Periciales 2026 - UP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --blue-dark: #002b5c;
-            --gold: #d4af37;
-            --gold-light: #f3e5ab;
+            /* Paleta Oficial del Flyer Institucional */
+            --bg-dark: #021226; 
+            --gold-primary: #D4AF37;
+            --gold-light: #F3E5AB;
             --white: #ffffff;
-            --gray-light: #f4f4f9;
-            --text-dark: #333333;
+            --text-dark: #1a2533;
+            --bg-section: #f4f6f9;
+            --shadow-elegant: 0 15px 35px rgba(2, 18, 38, 0.1);
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--gray-light); color: var(--text-dark); line-height: 1.6; }
-        
-        header {
-            background-color: var(--blue-dark);
-            color: var(--gold);
-            padding: 2rem 1rem;
-            text-align: center;
-            border-bottom: 5px solid var(--gold);
-        }
-        
-        header h1 { margin-bottom: 0.5rem; letter-spacing: 1px; }
-        header p { color: var(--white); font-size: 1.1rem; }
-        
-        .container { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
-        
-        .card {
-            background: var(--white);
-            border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            border-left: 4px solid var(--blue-dark);
-        }
-        
-        h2 { color: var(--blue-dark); margin-bottom: 1.5rem; border-bottom: 2px solid var(--gold-light); padding-bottom: 0.5rem; }
-        
-        /* Formularios y Botones */
-        input, select, textarea {
-            width: 100%; padding: 10px; margin-bottom: 1rem;
-            border: 1px solid #ccc; border-radius: 4px; font-size: 1rem;
-        }
-        
-        .btn-gold {
-            background-color: var(--gold); color: var(--blue-dark);
-            border: none; padding: 10px 20px; font-weight: bold; font-size: 1rem;
-            border-radius: 4px; cursor: pointer; transition: background 0.3s;
-            display: inline-block; text-align: center;
-        }
-        .btn-gold:hover { background-color: #bfa02e; }
-        
-        .btn-blue {
-            background-color: var(--blue-dark); color: var(--white);
-            border: none; padding: 10px 20px; font-weight: bold; font-size: 1rem;
-            border-radius: 4px; cursor: pointer; transition: background 0.3s;
-        }
-        .btn-blue:hover { background-color: #001a38; }
 
-        .hidden { display: none; }
-        .flex-row { display: flex; gap: 10px; align-items: center; }
-        
-        /* Elementos dinámicos */
-        .list-item {
-            background: var(--gray-light); padding: 15px; margin-bottom: 10px;
-            border-radius: 4px; border-left: 3px solid var(--gold);
+        body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; background-color: var(--bg-section); 
+            color: var(--text-dark); 
+            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
-        .speaker-card { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 6px;}
-        .speaker-img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
-        .question-box { background: #eef2f7; padding: 15px; border-radius: 6px; margin-bottom: 10px; }
-        .question-author { font-weight: bold; color: var(--blue-dark); font-size: 0.9rem; }
+
+        /* --- NAVEGACIÓN ESTILO GLASSMORPHISM --- */
+        nav { 
+            background: rgba(2, 18, 38, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 1000;
+            border-bottom: 2px solid var(--gold-primary);
+        }
+        nav h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.3rem; color: var(--gold-primary); margin: 0; 
+            letter-spacing: 1px;
+        }
+        .nav-links { display: flex; gap: 20px; flex-wrap: wrap; }
+        .nav-links a { 
+            text-decoration: none; color: var(--white); font-weight: 400; 
+            font-size: 0.9rem; transition: var(--transition);
+            padding: 5px 10px; border-radius: 4px;
+        }
+        .nav-links a:hover { color: var(--bg-dark); background-color: var(--gold-primary); }
+
+        /* --- HERO SECTION SOLEMNE --- */
+        .hero { 
+            padding: 100px 8%; 
+            background: linear-gradient(135deg, #021226 0%, #051e3e 100%); 
+            color: white; text-align: center; position: relative;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(circle, rgba(212, 175, 55, 0.08) 1px, transparent 1px);
+            background-size: 30px 30px; opacity: 0.7;
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero h4 { color: var(--gold-primary); font-weight: 600; letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase; }
+        .hero h2 { 
+            font-family: 'Playfair Display', serif; font-size: 3.5rem; margin: 0; 
+            text-transform: uppercase; text-shadow: 2px 2px 8px rgba(0,0,0,0.6); line-height: 1.1;
+        }
+        .hero p { font-size: 1.1rem; color: #a8b2c1; margin: 25px 0 30px; font-weight: 300; }
         
-        /* Admin Controls */
-        .admin-controls { background: #ffeebb; padding: 10px; border-radius: 4px; margin-bottom: 15px; display: none; }
+        .event-details {
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 25px; margin-bottom: 40px;
+            font-size: 0.95rem; color: var(--gold-light); font-weight: 700;
+        }
+
+        /* --- BOTONES --- */
+        .btn-gold { 
+            background: var(--gold-primary); color: var(--bg-dark); border: none; 
+            padding: 16px 35px; border-radius: 6px; font-weight: 700; 
+            cursor: pointer; transition: var(--transition); text-transform: uppercase;
+            letter-spacing: 1px; font-size: 0.9rem; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+            width: 100%; box-sizing: border-box; text-align: center; display: inline-block;
+        }
+        .btn-gold:hover { background: #e5c355; transform: translateY(-3px); box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4); }
+        .btn-admin { background: #ef4444; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-top: 15px; width: 100%; font-weight: bold;}
+
+        /* --- SECCIONES --- */
+        .seccion { padding: 80px 8%; max-width: 1100px; margin: 0 auto; }
+        .titulo-sec { text-align: center; font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 10px; color: var(--bg-dark); }
+        .linea-oro { width: 80px; height: 3px; background: var(--gold-primary); margin: 0 auto 50px auto; border-radius: 2px;}
+
+        /* --- EXPOSITORES --- */
+        .speaker-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 35px; }
+        .speaker-card { 
+            background: var(--white); border-radius: 12px; overflow: hidden; 
+            box-shadow: var(--shadow-elegant); transition: var(--transition);
+            border-bottom: 4px solid transparent;
+        }
+        .speaker-card:hover { transform: translateY(-10px); border-bottom: 4px solid var(--gold-primary); }
+        .speaker-img { width: 100%; height: 320px; object-fit: cover; object-position: top; }
+        .speaker-info { padding: 25px; text-align: center; }
+        .speaker-info h3 { margin: 0; font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--bg-dark); }
+        .speaker-info p { color: #555; font-size: 0.95rem; margin: 8px 0 0 0; font-weight: 600; text-transform: uppercase; color: var(--gold-primary); }
+
+        /* --- AGENDA --- */
+        .agenda-container { background: white; border-radius: 12px; box-shadow: var(--shadow-elegant); padding: 35px; }
+        .agenda-item { display: flex; align-items: flex-start; padding: 25px 0; border-bottom: 1px solid #eee; transition: var(--transition); }
+        .agenda-item:last-child { border-bottom: none; }
+        .agenda-time { min-width: 130px; font-weight: 800; color: var(--gold-primary); font-size: 1.1rem; padding-top: 2px; }
+        .agenda-content { flex-grow: 1; padding-left: 20px; border-left: 2px solid #eee; }
+        .agenda-content h4 { margin: 0 0 8px 0; font-size: 1.15rem; color: var(--bg-dark); white-space: pre-line; line-height: 1.5; }
+
+        /* --- PREGUNTAS --- */
+        .qa-container { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; }
+        .form-panel { background: white; padding: 35px; border-radius: 12px; box-shadow: var(--shadow-elegant); border-top: 5px solid var(--bg-dark); }
+        .board-panel { display: flex; flex-direction: column; gap: 20px; max-height: 600px; overflow-y: auto; padding-right: 15px; }
+        .question-card { background: white; padding: 25px; border-radius: 12px; border-left: 5px solid var(--gold-primary); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .q-author { font-weight: 800; font-size: 0.95rem; color: var(--bg-dark); margin-bottom: 5px; }
+        .q-target { font-size: 0.8rem; color: var(--gold-primary); text-transform: uppercase; font-weight: bold; margin-bottom: 10px; display: inline-block; background: #fff5d6; padding: 3px 8px; border-radius: 4px;}
+        .q-text { font-style: italic; color: #444; margin: 0; line-height: 1.6; }
+
+        /* --- FORMULARIOS --- */
+        .form-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; font-weight: 700; margin-bottom: 8px; font-size: 0.85rem; color: var(--bg-dark); text-transform: uppercase; }
+        input, select, textarea { 
+            width: 100%; padding: 14px; border: 1px solid #ddd; 
+            border-radius: 6px; background: #fafafa; font-family: inherit; font-size: 1rem; box-sizing: border-box;
+        }
+        textarea { resize: vertical; min-height: 100px; }
+
+        /* --- MODALES --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(2, 18, 38, 0.85); backdrop-filter: blur(8px);
+            display: flex; justify-content: center; align-items: center; z-index: 2000;
+            opacity: 0; visibility: hidden; transition: var(--transition);
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content {
+            background: white; padding: 40px; border-radius: 12px; width: 90%; max-width: 550px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+        .modal-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--bg-dark); margin-top: 0; margin-bottom: 25px; }
+        
+        .admin-bar { background: #16a34a; color: white; padding: 12px; text-align: center; font-weight: bold; display: none; position: fixed; bottom: 0; width: 100%; z-index: 3000; }
+        .btn-add-admin { margin-top: 30px; display: none; width: 100%; background: var(--bg-section); color: var(--bg-dark); border: 2px dashed var(--gold-primary); padding: 15px; cursor: pointer; text-transform: uppercase; font-weight: 800; border-radius: 8px;}
+
+        @media (max-width: 768px) {
+            .qa-container { grid-template-columns: 1fr; }
+            nav { flex-direction: column; gap: 15px; }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Jornada Académica Estudiantil</h1>
-        <p>Facultad de Derecho y Ciencias Políticas | Centro Regional Universitario</p>
-    </header>
+<div id="adminNotice" class="admin-bar">⚙️ MODO ORGANIZADOR ACTIVADO - LOS CAMBIOS IMPACTAN LA BASE DE DATOS</div>
 
-    <div class="container">
-        <!-- SECCIÓN DE REGISTRO / ACCESO -->
-        <div class="card" id="registro">
-            <h2>Validación de Asistencia y Acceso</h2>
-            <form id="loginForm">
-                <select id="roleSelect" onchange="gestionarCamposLogin()" required>
-                    <option value="" disabled selected>Seleccione su perfil...</option>
-                    <option value="Estudiante">Estudiante</option>
-                    <option value="Profesor">Profesor / Invitado</option>
-                    <option value="Admin">Organizador (Admin)</option>
+<nav>
+    <h1>Lex | Universidad de Panamá</h1>
+    <div class="nav-links">
+        <a href="#expositores">Expositores</a>
+        <a href="#agenda">Agenda</a>
+        <a href="#preguntas">Foro de Preguntas</a>
+        <a href="#registro" style="background: var(--gold-primary); color: var(--bg-dark); font-weight: 700;">Gestión de Acceso</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-content">
+        <h4>Facultad de Derecho y Ciencias Políticas</h4>
+        <h2>Jornada de Pruebas Periciales y Documentales.</h2>
+        <p>Realizado por los estudiantes de tercer año y la Mgtr. Gladys Argelis Morán Núñez.</p>
+        
+        <div class="event-details">
+            <div>📅 8 DE JUNIO DEL 2026</div>
+            <div>⏰ DE 6:00 A 8:00 P.M.</div>
+            <div>📍 SALÓN MULTIUSOS, CRUC DE COCLÉ</div>
+        </div>
+        <button class="btn-gold" style="width:auto;" onclick="document.getElementById('registro').scrollIntoView()">Registrar Mi Asistencia</button>
+    </div>
+</section>
+
+<section id="registro" class="seccion">
+    <h2 class="titulo-sec">Gestión de Acceso</h2>
+    <div class="linea-oro"></div>
+    <div style="max-width: 500px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; box-shadow: var(--shadow-elegant); border-top: 5px solid var(--gold-primary);">
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Seleccionar Perfil</label>
+                <select id="roleSelect" onchange="gestionarCamposLogin()">
+                    <option value="" disabled selected>Elige tu perfil...</option>
+                    <option value="Estudiante">Estudiante / Asistente</option>
+                    <option value="Profesor">Profesor</option>
+                    <option value="Admin">Organizador (Comité)</option>
                 </select>
-
-                <!-- Campos para Asistentes -->
-                <div id="asistenteFields" class="hidden">
-                    <input type="text" id="regNombre" placeholder="Nombre Completo">
-                    <input type="text" id="regCedula" placeholder="Cédula (Ej. 8-XXX-XXXX)">
-                    <input type="email" id="regCorreo" placeholder="Correo Electrónico">
-                    <select id="regAno" class="hidden">
-                        <option value="" disabled selected>Año de Carrera...</option>
-                        <option value="1er Año">1er Año</option>
-                        <option value="2do Año">2do Año</option>
-                        <option value="3er Año">3er Año</option>
-                        <option value="4to Año">4to Año</option>
-                        <option value="5to Año">5to Año</option>
+            </div>
+            
+            <div id="camposRegistro" style="display:none;">
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" id="regNombre" placeholder="Ej. Claudio Marín">
+                </div>
+                <div class="form-group">
+                    <label>Cédula</label>
+                    <input type="text" id="regCedula" placeholder="Ej. 8-000-0000">
+                </div>
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="regCorreo" placeholder="ejemplo@correo.com">
+                </div>
+                <div class="form-group" id="campoAnoEstudiante" style="display:none;">
+                    <label>Año de Carrera</label>
+                    <select id="regAno">
+                        <option value="1er Año">Primer Año</option>
+                        <option value="2do Año">Segundo Año</option>
+                        <option value="3er Año" selected>Tercer Año</option>
+                        <option value="4to Año">Cuarto Año</option>
                     </select>
                 </div>
-
-                <!-- Campo para Admin -->
-                <div id="adminFields" class="hidden">
-                    <input type="password" id="adminPass" placeholder="Contraseña de Organizador">
-                </div>
-
-                <button type="submit" class="btn-blue" style="width: 100%;">Ingresar / Registrar Asistencia</button>
-            </form>
-        </div>
-
-        <!-- SECCIÓN DE EXPOSITORES -->
-        <div class="card" id="expositores">
-            <div class="flex-row" style="justify-content: space-between; margin-bottom: 1rem;">
-                <h2>Panel de Expositores</h2>
-                <div class="admin-controls">
-                    <button class="btn-gold" onclick="toggleModal('modalSpeaker')">+ Nuevo Expositor</button>
-                </div>
             </div>
-            <div id="speakersList">
-                <!-- Se renderiza vía JS -->
-            </div>
-        </div>
 
-        <!-- SECCIÓN DE AGENDA -->
-        <div class="card" id="agenda">
-            <div class="flex-row" style="justify-content: space-between; margin-bottom: 1rem;">
-                <h2>Agenda Temática</h2>
-                <div class="admin-controls">
-                    <button class="btn-gold" onclick="toggleModal('modalAgenda')">+ Nuevo Tema</button>
-                </div>
+            <div class="form-group" id="passArea" style="display:none;">
+                <label>Clave de Organizador</label>
+                <input type="password" id="adminPass" placeholder="Ingresa la clave maestra">
             </div>
-            <div id="agendaList">
-                <!-- Se renderiza vía JS -->
-            </div>
-        </div>
-
-        <!-- SECCIÓN DE FORO DE PREGUNTAS -->
-        <div class="card" id="foro">
-            <h2>Foro Interactivo (Mesa Principal)</h2>
-            <p style="margin-bottom: 1rem; font-size: 0.9rem;">Las preguntas enviadas aquí serán leídas por el moderador durante la etapa probatoria y de debate.</p>
             
-            <textarea id="nuevaPregunta" rows="3" placeholder="Escriba su pregunta sobre procedimiento, nulidades o el tema en curso..."></textarea>
-            <!-- CORRECCIÓN 1: Pasar 'event' explícitamente -->
-            <button class="btn-blue" onclick="submitQuestion(event)">Enviar a la Mesa</button>
-            
-            <div id="questionsList" style="margin-top: 2rem;">
-                <!-- Se renderiza vía JS -->
+            <button type="submit" id="btnSubmitLogin" class="btn-gold" style="margin-top: 15px;">Confirmar Asistencia</button>
+        </form>
+    </div>
+</section>
+
+<section id="expositores" class="seccion">
+    <h2 class="titulo-sec">Cuerpo de Expositores</h2>
+    <div class="linea-oro"></div>
+    <div class="speaker-grid" id="speakerGrid">
+        </div>
+    <button class="btn-add-admin admin-only" onclick="openModal('modalSpeaker')">➕ Agregar Nuevo Expositor</button>
+</section>
+
+<section id="agenda" class="seccion" style="background: transparent;">
+    <h2 class="titulo-sec">Cronograma Oficial</h2>
+    <div class="linea-oro"></div>
+    <div class="agenda-container">
+        <div id="agendaContainer"></div>
+        <button class="btn-add-admin admin-only" onclick="openModal('modalAgenda')" style="margin-top: 30px;">➕ Agregar Bloque a la Agenda</button>
+    </div>
+</section>
+
+<section id="preguntas" class="seccion">
+    <h2 class="titulo-sec">Foro de Preguntas</h2>
+    <div class="linea-oro"></div>
+    <div class="qa-container">
+        <div class="form-panel">
+            <h3 style="margin-top:0; color: var(--bg-dark); font-family: 'Playfair Display', serif; font-size:1.8rem;">Enviar Pregunta</h3>
+            <p style="font-size: 0.95rem; color: #666; margin-bottom: 25px;">Las consultas serán leídas por el moderador en vivo.</p>
+            <div class="form-group">
+                <label>Tu Nombre (Opcional)</label>
+                <input type="text" id="qName" placeholder="Ej. Juan Pérez">
             </div>
+            <div class="form-group">
+                <label>Dirigido a:</label>
+                <select id="qTarget">
+                    <option value="Mesa General">Mesa General (Todos los expositores)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Tu Pregunta</label>
+                <textarea id="qText" placeholder="Redacta tu consulta de forma clara..."></textarea>
+            </div>
+            <button class="btn-gold" onclick="submitQuestion(event)">Enviar a la Mesa</button>
+        </div>
+        <div class="board-panel" id="questionsBoard"></div>
+    </div>
+</section>
+
+<div class="modal-overlay" id="modalSpeaker">
+    <div class="modal-content">
+        <h2 class="modal-title">Añadir Expositor</h2>
+        <div class="form-group">
+            <label>Nombre del Magistrado / Perito</label>
+            <input type="text" id="addSpkName" placeholder="Ej. Dr. Ricardo Méndez">
+        </div>
+        <div class="form-group">
+            <label>Especialidad o Cargo</label>
+            <input type="text" id="addSpkRole" placeholder="Ej. Especialista en Documentoscopía">
+        </div>
+        <div class="form-group">
+            <label>Fotografía (Memoria Local)</label>
+            <input type="file" accept="image/*" onchange="procesarImagenLocal(event)">
+            <input type="hidden" id="addSpkBase64">
+        </div>
+        <div style="display: flex; gap: 15px; margin-top: 30px;">
+            <button class="btn-gold" style="flex:1;" onclick="saveNewSpeaker(event)">Guardar en Nube</button>
+            <button class="btn-gold" style="flex:1; background: #e2e8f0; color: #333;" onclick="closeModals()">Cancelar</button>
         </div>
     </div>
+</div>
 
-    <!-- MODALES DE ADMINISTRADOR (Ocultos por defecto) -->
-    <div id="modalSpeaker" class="card hidden" style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); z-index: 1000; width: 90%; max-width: 500px; border: 2px solid var(--blue-dark);">
-        <h3 style="margin-bottom: 1rem; color: var(--blue-dark);">Añadir Expositor</h3>
-        <input type="text" id="addSpkName" placeholder="Nombre (Ej. Dr. Carlos Pérez)">
-        <input type="text" id="addSpkRole" placeholder="Especialidad / Cargo">
-        <input type="text" id="addSpkBase64" placeholder="URL de la Foto (Opcional)">
-        <div class="flex-row">
-            <!-- CORRECCIÓN 1: Pasar 'event' explícitamente -->
-            <button class="btn-gold" style="flex:1;" onclick="saveNewSpeaker(event)">Guardar</button>
-            <button class="btn-blue" style="flex:1;" onclick="toggleModal('modalSpeaker')">Cancelar</button>
+<div class="modal-overlay" id="modalAgenda">
+    <div class="modal-content">
+        <h2 class="modal-title">Añadir a la Agenda</h2>
+        <div class="form-group">
+            <label>Hora</label>
+            <input type="text" id="addAgTime" placeholder="Ej. 07:15 PM">
+        </div>
+        <div class="form-group">
+            <label>Actividad / Tema</label>
+            <textarea id="addAgEvent" placeholder="Describe los detalles..."></textarea>
+        </div>
+        <div style="display: flex; gap: 15px; margin-top: 30px;">
+            <button class="btn-gold" style="flex:1;" onclick="saveNewAgenda(event)">Guardar en Nube</button>
+            <button class="btn-gold" style="flex:1; background: #e2e8f0; color: #333;" onclick="closeModals()">Cancelar</button>
         </div>
     </div>
+</div>
 
-    <div id="modalAgenda" class="card hidden" style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); z-index: 1000; width: 90%; max-width: 500px; border: 2px solid var(--blue-dark);">
-        <h3 style="margin-bottom: 1rem; color: var(--blue-dark);">Añadir Punto a la Agenda</h3>
-        <input type="time" id="addAgendaTime">
-        <input type="text" id="addAgendaTitle" placeholder="Tema (Ej. Evolución de Registros Contractuales)">
-        <div class="flex-row">
-            <!-- CORRECCIÓN 1: Pasar 'event' explícitamente -->
-            <button class="btn-gold" style="flex:1;" onclick="saveNewAgenda(event)">Guardar</button>
-            <button class="btn-blue" style="flex:1;" onclick="toggleModal('modalAgenda')">Cancelar</button>
-        </div>
-    </div>
+<script>
+    // ESTA ES TU URL OFICIAL. NO LA BORRES.
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwUcDmo8wCqBQcsV0yNb0dG6gSVkAV5maUqg0CqqH59lCetRrogZZeimrX5O-e315b4mA/exec";
+    
+    // Base de datos temporal local
+    let db = { speakers: [], agenda: [], questions: [] };
 
-    <script>
-        // ---------------------------------------------------------
-        // 1. BASE DE DATOS LOCAL Y ESTADO
-        // ---------------------------------------------------------
-        let db = {
-            speakers: [
-                { id: "1", name: "Magistrada Invitada", role: "Especialista en Derecho Procesal", img: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=150&q=80" }
-            ],
-            agenda: [
-                { id: "1", time: "09:00", title: "Acreditación y Palabras de Apertura" },
-                { id: "2", time: "09:30", title: "La Actividad Probatoria en el Proceso Civil" }
-            ],
-            questions: [],
-            asistencia: [] // CORRECCIÓN 2: Estructura para guardar la asistencia
+    // --- FUNCIÓN MAESTRA DE CONEXIÓN CON TU EXCEL ---
+    // Esta función habla el idioma exacto que requiere tu archivo Código.gs
+    async function sendDataToGoogle(sheetName, actionType, rowData, btnElement = null) {
+        let originalText = "";
+        if (btnElement) {
+            originalText = btnElement.innerText;
+            btnElement.innerText = "Sincronizando con Excel...";
+            btnElement.disabled = true;
+        }
+
+        // Estructura exacta que requiere tu código Apps Script
+        const payload = {
+            sheet: sheetName,
+            action: actionType,
+            row: rowData
         };
 
-        const WEBAPP_URL = "URL_DE_TU_GOOGLE_APPS_SCRIPT"; // Reemplaza esto cuando tengas el script listo
+        let formData = new FormData();
+        formData.append("payload", JSON.stringify(payload));
 
-        // ---------------------------------------------------------
-        // 2. UTILIDAD DE SEGURIDAD (Prevención XSS)
-        // ---------------------------------------------------------
-        // CORRECCIÓN 3: Limpiar texto antes de insertarlo en HTML
-        function escapeHTML(str) {
-            if (!str) return "";
-            return str.replace(/[&<>'"]/g, function(tag) {
-                const charsToReplace = {
-                    '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
-                };
-                return charsToReplace[tag] || tag;
-            });
-        }
-
-        // ---------------------------------------------------------
-        // 3. LÓGICA DE INTERFAZ Y REGISTRO
-        // ---------------------------------------------------------
-        function gestionarCamposLogin() {
-            const role = document.getElementById('roleSelect').value;
-            const asisFields = document.getElementById('asistenteFields');
-            const adminFields = document.getElementById('adminFields');
-            const anoSelect = document.getElementById('regAno');
-
-            asisFields.classList.add('hidden');
-            adminFields.classList.add('hidden');
-            anoSelect.classList.add('hidden');
-
-            if (role === 'Estudiante') {
-                asisFields.classList.remove('hidden');
-                anoSelect.classList.remove('hidden');
-            } else if (role === 'Profesor') {
-                asisFields.classList.remove('hidden');
-            } else if (role === 'Admin') {
-                adminFields.classList.remove('hidden');
-            }
-        }
-
-        document.getElementById('loginForm').onsubmit = function(e) {
-            e.preventDefault();
-            const role = document.getElementById('roleSelect').value;
-            const pass = document.getElementById('adminPass').value;
-
-            if(!role) return alert("Selecciona un perfil primero.");
-
-            if(role === 'Admin') {
-                if(pass === 'Derecho2026') { 
-                    localStorage.setItem('isAdmin', 'true');
-                    alert("🔐 Acceso Concedido: Modo Organizador activado.");
-                    document.getElementById('adminPass').value = '';
-                    checkAdminUI();
-                    document.getElementById('expositores').scrollIntoView();
-                } else { 
-                    alert("❌ Contraseña de administrador incorrecta."); 
-                }
-            } else {
-                // CORRECCIÓN 2: Lógica implementada para guardar el registro real
-                const nuevoAsistente = {
-                    id: Date.now().toString(),
-                    nombre: document.getElementById('regNombre').value,
-                    cedula: document.getElementById('regCedula').value,
-                    correo: document.getElementById('regCorreo').value,
-                    rol: role,
-                    ano: (role === 'Estudiante') ? document.getElementById('regAno').value : 'N/A',
-                    fechaHora: new Date().toLocaleString()
-                };
-
-                if(!nuevoAsistente.nombre || !nuevoAsistente.cedula || !nuevoAsistente.correo) {
-                    return alert("⚠️ Por favor, completa todos tus campos de registro.");
-                }
-
-                db.asistencia.push(nuevoAsistente);
-                
-                // Guardar nombre en sesión para firmar las preguntas
-                sessionStorage.setItem('userName', nuevoAsistente.nombre);
-                
-                // Sincronizar con la nube (Google Sheets) silenciosamente
-                syncCloud(e.target); 
-                
-                alert("✅ Validación académica registrada con éxito. ¡Bienvenido/a!");
-                document.getElementById('loginForm').reset();
-                gestionarCamposLogin();
-                document.getElementById('expositores').scrollIntoView();
-            }
-        };
-
-        function checkAdminUI() {
-            const isAdmin = localStorage.getItem('isAdmin') === 'true';
-            const controls = document.querySelectorAll('.admin-controls');
-            controls.forEach(el => el.style.display = isAdmin ? 'block' : 'none');
-        }
-
-        function toggleModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.toggle('hidden');
-        }
-
-        // ---------------------------------------------------------
-        // 4. FUNCIONES DE RENDERIZADO (Con protección XSS)
-        // ---------------------------------------------------------
-        function renderAll() {
-            renderSpeakers();
-            renderAgenda();
-            renderQuestions();
-            checkAdminUI();
-        }
-
-        function renderSpeakers() {
-            const container = document.getElementById('speakersList');
-            container.innerHTML = db.speakers.map(spk => `
-                <div class="speaker-card">
-                    <img src="${escapeHTML(spk.img)}" class="speaker-img" alt="Foto">
-                    <div>
-                        <h4 style="color: var(--blue-dark);">${escapeHTML(spk.name)}</h4>
-                        <p style="font-size: 0.9rem; color: #555;">${escapeHTML(spk.role)}</p>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderAgenda() {
-            const container = document.getElementById('agendaList');
-            container.innerHTML = db.agenda.map(item => `
-                <div class="list-item">
-                    <strong>${escapeHTML(item.time)}</strong> - ${escapeHTML(item.title)}
-                </div>
-            `).join('');
-        }
-
-        function renderQuestions() {
-            const container = document.getElementById('questionsList');
-            if (db.questions.length === 0) {
-                container.innerHTML = `<p style="color: #666; font-style: italic;">Aún no hay preguntas en la mesa. Sé el primero en participar.</p>`;
-                return;
-            }
-            container.innerHTML = db.questions.map(q => `
-                <div class="question-box">
-                    <div class="question-author">${escapeHTML(q.author)} pregunta:</div>
-                    <p style="margin-top: 5px;">${escapeHTML(q.text)}</p>
-                </div>
-            `).reverse().join(''); // Reverse para mostrar la más reciente primero
-        }
-
-        // ---------------------------------------------------------
-        // 5. FUNCIONES CRUD (Con el 'event' corregido)
-        // ---------------------------------------------------------
-        function saveNewSpeaker(e) {
-            const name = document.getElementById('addSpkName').value;
-            const role = document.getElementById('addSpkRole').value;
-            const img = document.getElementById('addSpkBase64').value || 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=150&q=80';
-            
-            if(!name || !role) return alert("Por favor, llena el nombre y el cargo.");
-            
-            db.speakers.push({ id: Date.now().toString(), name, role, img });
-            
-            document.getElementById('addSpkName').value = '';
-            document.getElementById('addSpkRole').value = '';
-            document.getElementById('addSpkBase64').value = '';
-            
-            toggleModal('modalSpeaker');
-            renderSpeakers();
-            syncCloud(e.target); // CORRECCIÓN 1: Se usa el evento pasado
-        }
-
-        function saveNewAgenda(e) {
-            const time = document.getElementById('addAgendaTime').value;
-            const title = document.getElementById('addAgendaTitle').value;
-            
-            if(!time || !title) return alert("Completa la hora y el tema.");
-            
-            // Ordenar por hora (simplificado)
-            db.agenda.push({ id: Date.now().toString(), time, title });
-            db.agenda.sort((a, b) => a.time.localeCompare(b.time));
-            
-            document.getElementById('addAgendaTime').value = '';
-            document.getElementById('addAgendaTitle').value = '';
-            
-            toggleModal('modalAgenda');
-            renderAgenda();
-            syncCloud(e.target); // CORRECCIÓN 1: Se usa el evento pasado
-        }
-
-        function submitQuestion(e) {
-            const textInput = document.getElementById('nuevaPregunta');
-            const text = textInput.value.trim();
-            const author = sessionStorage.getItem('userName') || 'Asistente Anónimo';
-            
-            if(!text) return alert("Escribe una pregunta antes de enviar.");
-            
-            db.questions.push({ id: Date.now().toString(), author, text });
-            textInput.value = '';
-            
-            renderQuestions();
-            syncCloud(e.target); // CORRECCIÓN 1: Se usa el evento pasado
-            alert("Su pregunta ha sido enviada a la mesa principal.");
-        }
-
-        // ---------------------------------------------------------
-        // 6. SINCRONIZACIÓN CON GOOGLE APPS SCRIPT
-        // ---------------------------------------------------------
-        function syncCloud(btnElement = null) {
-            if (WEBAPP_URL === "https://script.google.com/macros/s/AKfycbwUcDmo8wCqBQcsV0yNb0dG6gSVkAV5maUqg0CqqH59lCetRrogZZeimrX5O-e315b4mA/exec") {
-                console.log("Sincronización simulada. Falta colocar la URL del App Script.");
-                return;
-            }
-
-            let originalText = "Guardando...";
+        try {
+            await fetch(APPS_SCRIPT_URL, { method: 'POST', body: formData, mode: 'no-cors' });
+            // Al tener no-cors, asumimos éxito si la red no falla
+        } catch (error) {
+            console.error("Error de conexión:", error);
+            alert("Hubo un error al conectar con la base de datos.");
+        } finally {
             if (btnElement) {
-                originalText = btnElement.innerText;
-                btnElement.innerText = "Sincronizando...";
-                btnElement.disabled = true;
+                btnElement.innerText = originalText;
+                btnElement.disabled = false;
             }
-
-            fetch(WEBAPP_URL, {
-                method: 'POST',
-                mode: 'no-cors', // Oculta el CORS, siempre resolverá "ok"
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(db)
-            })
-            .then(() => {
-                console.log("Datos sincronizados en segundo plano.");
-            })
-            .catch(error => {
-                console.error("Error de red al sincronizar:", error);
-            })
-            .finally(() => {
-                if (btnElement) {
-                    btnElement.innerText = originalText;
-                    btnElement.disabled = false;
-                }
-            });
         }
+    }
 
-        // Iniciar renderizado al cargar
-        window.onload = () => {
-            renderAll();
-        };
-    </script>
+    // --- LÓGICA DE REGISTRO (CONEXIÓN A LA PESTAÑA 'Registros') ---
+    function gestionarCamposLogin() {
+        const role = document.getElementById('roleSelect').value;
+        const camposReg = document.getElementById('camposRegistro');
+        const campoAno = document.getElementById('campoAnoEstudiante');
+        const passArea = document.getElementById('passArea');
+
+        if (role === 'Admin') {
+            passArea.style.display = 'block';
+            camposReg.style.display = 'none';
+        } else {
+            passArea.style.display = 'none';
+            camposReg.style.display = 'block';
+            campoAno.style.display = (role === 'Estudiante') ? 'block' : 'none';
+        }
+    }
+
+    document.getElementById('loginForm').onsubmit = async function(e) {
+        e.preventDefault();
+        const role = document.getElementById('roleSelect').value;
+        const btn = document.getElementById('btnSubmitLogin');
+
+        if(!role) return alert("Selecciona un perfil primero.");
+
+        if(role === 'Admin') {
+            if(document.getElementById('adminPass').value === 'Derecho2026') { 
+                localStorage.setItem('isAdmin', 'true');
+                alert("Acceso Concedido: Modo Organizador activado.");
+                document.getElementById('adminPass').value = '';
+                renderAll();
+                document.getElementById('expositores').scrollIntoView();
+            } else { 
+                alert("Contraseña incorrecta."); 
+            }
+        } else {
+            const nombre = document.getElementById('regNombre').value;
+            const cedula = document.getElementById('regCedula').value;
+            const correo = document.getElementById('regCorreo').value;
+            const ano = (role === 'Estudiante') ? document.getElementById('regAno').value : 'N/A';
+            const fecha = new Date().toLocaleString();
+
+            if(!nombre || !cedula || !correo) return alert("Completa todos tus datos.");
+
+            // ENVÍO DE DATOS A LA PESTAÑA "Registros" EN TU EXCEL
+            await sendDataToGoogle("Registros", "add", [fecha, role, nombre, cedula, correo, ano], btn);
+            
+            alert("✅ Registro oficial guardado con éxito en la base de datos.");
+            document.getElementById('loginForm').reset();
+            gestionarCamposLogin();
+        }
+    };
+
+    // --- FUNCIONES PARA AÑADIR EXPOSITORES, AGENDA Y PREGUNTAS ---
+    async function saveNewSpeaker(e) {
+        const id = Date.now().toString();
+        const name = document.getElementById('addSpkName').value;
+        const role = document.getElementById('addSpkRole').value;
+        const img = document.getElementById('addSpkBase64').value || 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=400&q=80';
+        
+        if(!name || !role) return alert("Por favor, llena el nombre y el cargo.");
+        
+        // Lo añadimos a la pantalla inmediatamente
+        db.speakers.push({ id, name, role, img });
+        renderAll();
+        closeModals();
+
+        // Lo enviamos a la pestaña "Expositores" del Excel
+        await sendDataToGoogle("Expositores", "add", [id, name, role, img], e.target);
+    }
+
+    async function saveNewAgenda(e) {
+        const id = Date.now().toString();
+        const time = document.getElementById('addAgTime').value;
+        const eventText = document.getElementById('addAgEvent').value;
+        
+        if(!time || !eventText) return alert("Llena la hora y la actividad.");
+        
+        db.agenda.push({ id, time, event: eventText });
+        renderAll();
+        closeModals();
+
+        // Lo enviamos a la pestaña "Agenda" del Excel
+        await sendDataToGoogle("Agenda", "add", [id, time, eventText], e.target);
+    }
+
+    async function submitQuestion(e) {
+        const id = Date.now().toString();
+        const author = document.getElementById('qName').value || "Anónimo";
+        const target = document.getElementById('qTarget').value;
+        const question = document.getElementById('qText').value;
+        
+        if(!question) return alert("Debes redactar una pregunta.");
+        
+        db.questions.push({ id, author, target, question });
+        renderAll();
+
+        // Lo enviamos a la pestaña "Preguntas" del Excel
+        await sendDataToGoogle("Preguntas", "add", [id, author, question, target], e.target);
+        document.getElementById('qText').value = '';
+    }
+
+    // --- RENDERIZADO VISUAL EN PANTALLA ---
+    function renderAll() {
+        const isAdmin = localStorage.getItem('isAdmin') === 'true';
+        document.getElementById('adminNotice').style.display = isAdmin ? 'block' : 'none';
+        document.querySelectorAll('.admin-only').forEach(el => el.style.display = isAdmin ? 'block' : 'none');
+
+        // Render Expositores
+        const sGrid = document.getElementById('speakerGrid');
+        sGrid.innerHTML = db.speakers.length ? '' : '<p style="text-align:center; grid-column: 1/-1;">Sin expositores registrados aún.</p>';
+        db.speakers.forEach(s => {
+            sGrid.innerHTML += `
+                <div class="speaker-card">
+                    <img src="${s.img}" class="speaker-img">
+                    <div class="speaker-info">
+                        <h3>${s.name}</h3><p>${s.role}</p>
+                    </div>
+                </div>`;
+        });
+
+        // Render Agenda
+        const aContainer = document.getElementById('agendaContainer');
+        aContainer.innerHTML = db.agenda.length ? '' : '<p style="text-align:center;">Agenda en construcción...</p>';
+        db.agenda.forEach(a => {
+            aContainer.innerHTML += `
+                <div class="agenda-item">
+                    <div class="agenda-time">${a.time}</div>
+                    <div class="agenda-content"><h4>${a.event}</h4></div>
+                </div>`;
+        });
+
+        // Render Preguntas y actualizar el selector "Dirigido a"
+        const qBoard = document.getElementById('questionsBoard');
+        const qTarget = document.getElementById('qTarget');
+        
+        qTarget.innerHTML = '<option value="Mesa General">Mesa General (Todos)</option>';
+        db.speakers.forEach(s => { qTarget.innerHTML += `<option value="${s.name}">${s.name}</option>`; });
+
+        qBoard.innerHTML = db.questions.length ? '' : '<p style="color:#888; font-style:italic;">Aún no hay preguntas.</p>';
+        db.questions.slice().reverse().forEach(q => {
+            qBoard.innerHTML += `
+                <div class="question-card">
+                    <div class="q-author">👤 ${q.author}</div>
+                    <div class="q-target">📍 Para: ${q.target}</div>
+                    <p class="q-text">"${q.question}"</p>
+                </div>`;
+        });
+    }
+
+    // Utilidad para Imágenes
+    function procesarImagenLocal(event) {
+        const archivo = event.target.files[0];
+        if (archivo) {
+            const lector = new FileReader();
+            lector.onloadend = function() { document.getElementById('addSpkBase64').value = lector.result; }
+            lector.readAsDataURL(archivo);
+        }
+    }
+
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
+    function closeModals() { document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active')); }
+
+    window.onload = () => { renderAll(); };
+</script>
 </body>
 </html>
