@@ -407,12 +407,13 @@
         }
     }
 
-    document.getElementById('loginForm').onsubmit = async function(e) {
+   document.getElementById('loginForm').onsubmit = async function(e) {
         e.preventDefault();
-        const role = document.getElementById('roleSelect').value;
+        const roleSelect = document.getElementById('roleSelect');
+        const role = roleSelect.value;
         const btn = document.getElementById('btnSubmitLogin');
 
-        if(!role) return alert("Seleccione un perfil.");
+        if(!role) return alert("Seleccione un perfil primero.");
 
         if(role === 'Admin') {
             if(document.getElementById('adminPass').value === 'Derecho2026') { 
@@ -421,35 +422,46 @@
                 document.getElementById('adminPass').value = '';
                 renderAll();
                 document.getElementById('expositores').scrollIntoView();
-            } else { alert("❌ Contraseña incorrecta."); }
+            } else { 
+                alert("❌ Contraseña de administrador incorrecta."); 
+            }
         } else {
             const nombre = document.getElementById('regNombre').value;
             const cedula = document.getElementById('regCedula').value;
             const correo = document.getElementById('regCorreo').value;
-            const fecha = new Date().toLocaleString();
 
-            if(!nombre || !cedula || !correo) return alert("Por favor, completa tus datos.");
+            if(!nombre || !cedula || !correo) return alert("⚠️ Por favor, completa todos tus campos de registro.");
+
+            // --- NUEVA LÓGICA PARA HORA Y FECHA SEPARADAS ---
+            const now = new Date();
+            // Obtener la fecha en formato DD/MM/AAAA
+            const fecha = now.toLocaleDateString('es-ES'); 
+            // Obtener la hora en formato HH:MM:SS
+            const hora = now.toLocaleTimeString('es-ES');
+            // -----------------------------------------------
 
             // LÓGICA DE ENRUTAMIENTO INTELIGENTE A GOOGLE SHEETS
-            let hojaDestino = "Registros"; // Hoja por defecto si algo falla
+            let hojaDestino = "Registros";
             if (role === 'Estudiante') {
                 hojaDestino = document.getElementById('regAno').value; // Envia a "1er Año", "2do Año", etc.
             } else if (role === 'Profesor') {
                 hojaDestino = "Profesores"; // Envia a la hoja de Profesores
             }
 
-            // Datos a enviar a la hoja del Excel [Fecha, Nombre, Cédula, Correo]
-            const datosFila = [fecha, nombre, cedula, correo];
+            // --- MODIFICACIÓN DEL ARRAY DE DATOS PARA EL EXCEL ---
+            // El orden debe ser: [Nombre, Cédula, Correo, Cargo, Hora, Fecha]
+            // "Cargo" será el valor del perfil seleccionado (role).
+            const datosFila = [nombre, cedula, correo, role, hora, fecha];
+            // -----------------------------------------------------
             
             await sendDataToGoogle(hojaDestino, "add", datosFila, btn);
-            alert("✅ Registro oficial guardado con éxito en la base de datos de " + hojaDestino);
             
-            // Limpieza suave
+            alert("✅ Validación académica registrada con éxito en la base de datos de " + hojaDestino);
             document.getElementById('loginForm').reset();
             gestionarCamposLogin();
+            document.getElementById('expositores').scrollIntoView();
         }
     };
-
     // --- GESTIÓN DE EXPOSITORES (CON BIOS Y CLICK-PARA-VER) ---
     async function saveNewSpeaker(e) {
         const id = Date.now().toString();
