@@ -158,7 +158,10 @@
 </head>
 <body>
 
-<div id="adminNotice" class="admin-bar">⚙️ MODO ORGANIZADOR ACTIVADO - LOS CAMBIOS AFECTAN LA BASE DE DATOS MUNDIAL</div>
+<div id="adminNotice" class="admin-bar">
+    ⚙️ MODO ORGANIZADOR ACTIVADO - LOS CAMBIOS AFECTAN LA BASE DE DATOS 
+    <button onclick="salirModoAdmin()" style="margin-left:15px; padding:5px 15px; background:white; color:#16a34a; border:none; border-radius:4px; font-weight:bold; cursor:pointer;">Cerrar Sesión</button>
+</div>
 
 <nav>
     <h1>Lex | Universidad de Panamá</h1>
@@ -590,6 +593,12 @@
         if(e === 'force' || e.target.classList.contains('modal-overlay')) {
             document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active')); 
         }
+    }
+    // --- FUNCIÓN PARA SALIR DEL MODO ADMIN ---
+    function salirModoAdmin() {
+        localStorage.removeItem('isAdmin'); // Borra el pase VIP de la memoria
+        alert("Has salido del Modo Organizador. Volviendo a la vista de usuario normal.");
+        renderAll(); // Recarga la vista para ocultar los botones de editar/borrar
     }
 
     window.onload = () => { loadGlobalData(); };
