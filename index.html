@@ -7,46 +7,47 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
+            /* Paleta Oficial del Flyer Institucional */
             --bg-dark: #021226; 
             --gold-primary: #D4AF37;
             --gold-light: #F3E5AB;
             --white: #ffffff;
             --text-dark: #1a2533;
-            --bg-section: #f8fafc;
+            --bg-section: #f4f6f9;
             --shadow-elegant: 0 10px 25px rgba(2, 18, 38, 0.08);
             --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--bg-section); color: var(--text-dark); overflow-x: hidden; scroll-behavior: smooth;}
 
-        /* --- NAVEGACIÓN --- */
+        /* --- NAVEGACIÓN STILO PREMIUM --- */
         nav { 
             background: rgba(2, 18, 38, 0.98); padding: 15px 5%;
             display: flex; justify-content: space-between; align-items: center;
             position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid var(--gold-primary);
         }
-        nav h1 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold-primary); margin: 0; }
+        nav h1 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold-primary); margin: 0; letter-spacing: 1px;}
         .nav-links { display: flex; gap: 15px; flex-wrap: wrap; }
-        .nav-links a { text-decoration: none; color: var(--white); font-size: 0.9rem; padding: 5px 10px; border-radius: 4px; transition: var(--transition);}
+        .nav-links a { text-decoration: none; color: var(--white); font-weight: 400; font-size: 0.9rem; transition: var(--transition); padding: 5px 10px; border-radius: 4px;}
         .nav-links a:hover { background-color: var(--gold-primary); color: var(--bg-dark); }
 
-        /* --- HERO CORREGIDO PARA MÓVILES --- */
+        /* --- HERO SECTION SOLEMNE (INSPIRADO EN EL BANNER) --- */
         .hero { 
             padding: 80px 5%; background: linear-gradient(135deg, #021226 0%, #062347 100%); 
             color: white; text-align: center; position: relative;
         }
-        .hero h4 { color: var(--gold-primary); font-weight: 600; letter-spacing: 2px; margin-bottom: 15px; font-size: 0.9rem;}
-        .hero h2 { 
-            font-family: 'Playfair Display', serif; 
-            /* TIPOGRAFÍA RESPONSIVA: Evita que el texto se salga de la pantalla en móviles */
-            font-size: clamp(2rem, 8vw, 4rem); 
-            margin: 0; line-height: 1.1; word-wrap: break-word; text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(circle, rgba(212, 175, 55, 0.08) 1px, transparent 1px);
+            background-size: 30px 30px; opacity: 0.7;
         }
-        .hero p { color: #cbd5e1; margin: 20px auto; max-width: 600px; line-height: 1.6;}
+        .hero h4 { color: var(--gold-primary); font-weight: 600; letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase; font-size: 0.9rem;}
+        .hero h2 { font-family: 'Playfair Display', serif; font-size: 3rem; margin: 0; text-transform: uppercase; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); line-height: 1.1;}
+        .hero p { font-size: 1rem; color: # cbd5e1; margin: 20px auto; max-width: 600px; font-weight: 300; line-height: 1.6;}
         
-        .event-details { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 30px; font-size: 0.9rem; color: var(--gold-light); font-weight: bold;}
+        .event-details { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 30px; font-size: 0.9rem; color: var(--gold-light); font-weight: 700;}
 
-        /* --- BOTONES --- */
+        /* --- BOTONES PREMIUM --- */
         .btn-gold { 
             background: var(--gold-primary); color: var(--bg-dark); border: none; 
             padding: 14px 28px; border-radius: 8px; font-weight: bold; cursor: pointer; 
@@ -54,20 +55,21 @@
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); width: 100%;
         }
         .btn-gold:hover { background: #ebd176; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.5); }
-        .btn-admin { background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-top: 10px; width: 100%;}
+        .btn-admin { background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-top: 10px; width: 100%; font-weight: bold;}
 
         /* --- ESTRUCTURA GENERAL --- */
         .seccion { padding: 60px 5%; max-width: 1000px; margin: 0 auto; }
-        .titulo-sec { text-align: center; font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--bg-dark); margin-bottom: 5px;}
+        .titulo-sec { text-align: center; font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 5px; color: var(--bg-dark); }
         .linea-oro { width: 60px; height: 3px; background: var(--gold-primary); margin: 0 auto 40px auto; border-radius: 2px;}
 
-        /* --- EXPOSITORES (TARJETAS INTERACTIVAS) --- */
+        /* --- EXPOSITORES (TARJETAS INTERACTIVAS Y ANIMADAS) --- */
         .speaker-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
         .speaker-card { 
             background: var(--white); border-radius: 15px; overflow: hidden; 
             box-shadow: var(--shadow-elegant); cursor: pointer; position: relative;
             transition: var(--transition); border: 1px solid #e2e8f0;
         }
+        /* Efecto hover elegante con sombra y borde oro */
         .speaker-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); border-color: var(--gold-primary);}
         .speaker-img { width: 100%; height: 280px; object-fit: cover; object-position: top; }
         .speaker-info { padding: 20px; text-align: center; }
@@ -75,32 +77,56 @@
         .speaker-info p { color: var(--gold-primary); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin: 5px 0 0 0; }
         .click-hint { font-size: 0.75rem; color: #94a3b8; margin-top: 10px; display: block; font-style: italic;}
 
-        /* --- AGENDA ANIMADA --- */
+        /* --- AGENDA ANIMADA CON SHADOWS --- */
         .agenda-container { background: white; border-radius: 15px; box-shadow: var(--shadow-elegant); padding: 25px; border-left: 4px solid var(--gold-primary);}
         .agenda-item { display: flex; align-items: flex-start; padding: 20px 0; border-bottom: 1px solid #f1f5f9; transition: var(--transition); }
         .agenda-item:hover { background-color: #f8fafc; padding-left: 10px; }
-        .agenda-time { min-width: 110px; font-weight: 900; color: var(--gold-primary); font-size: 1.1rem; }
-        .agenda-content { padding-left: 15px; border-left: 2px solid #e2e8f0; }
-        .agenda-content h4 { margin: 0; font-size: 1.1rem; color: var(--bg-dark); }
+        .agenda-item:last-child { border-bottom: none; }
+        .agenda-time { min-width: 110px; font-weight: 900; color: var(--gold-primary); font-size: 1.1rem; padding-top: 2px; }
+        .agenda-content { flex-grow: 1; padding-left: 15px; border-left: 2px solid #e2e8f0; }
+        .agenda-content h4 { margin: 0 0 5px 0; font-size: 1.1rem; color: var(--bg-dark); white-space: pre-line; line-height: 1.5; }
 
-        /* --- FORMULARIOS --- */
+        /* --- PREGUNTAS --- */
+        .qa-container { display: grid; grid-template-columns: 1fr 1.5fr; gap: 30px; }
+        .form-panel { background: white; padding: 30px; border-radius: 15px; box-shadow: var(--shadow-elegant); border-top: 5px solid var(--bg-dark); }
+        .board-panel { display: flex; flex-direction: column; gap: 20px; max-height: 600px; overflow-y: auto; padding-right: 15px; }
+        .question-card { background: white; padding: 25px; border-radius: 12px; border-left: 5px solid var(--gold-primary); box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: var(--transition); }
+        .question-card:hover { transform: translateX(3px); }
+        .q-author { font-weight: 800; font-size: 0.95rem; color: var(--bg-dark); margin-bottom: 5px; }
+        .q-target { font-size: 0.8rem; color: var(--gold-primary); text-transform: uppercase; font-weight: bold; margin-bottom: 10px; display: inline-block; background: #fff5d6; padding: 3px 8px; border-radius: 4px;}
+        .q-text { font-style: italic; color: #444; margin: 0; line-height: 1.6; }
+
+        /* --- FORMULARIOS PREMIUM CON TRANSICIONES SUAVES --- */
         .form-group { margin-bottom: 20px; text-align: left; }
-        label { display: block; font-weight: 700; margin-bottom: 6px; font-size: 0.85rem; color: #475569; text-transform: uppercase; }
+        label { display: block; font-weight: 700; margin-bottom: 6px; font-size: 0.85rem; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; }
         input, select, textarea { 
             width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 8px; 
             font-family: inherit; font-size: 1rem; transition: var(--transition); box-sizing: border-box; background: #f8fafc;
         }
         input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold-primary); background: white; box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);}
-        
-        .qa-container { display: grid; grid-template-columns: 1fr 1.5fr; gap: 30px; }
-        @media (max-width: 768px) {
-            .qa-container { grid-template-columns: 1fr; }
-            nav { flex-direction: column; gap: 10px; }
-            .agenda-item { flex-direction: column; gap: 5px;}
-            .agenda-content { border-left: none; padding-left: 0;}
+        textarea { resize: vertical; min-height: 100px; }
+
+        /* Nuevos estilos para transiciones suaves al revelar campos */
+        .form-reveal-group {
+          display: grid;
+          grid-template-rows: 0fr;
+          opacity: 0;
+          visibility: hidden;
+          overflow: hidden;
+          transition: grid-template-rows 0.35s ease-out, opacity 0.3s ease-out, margin 0.35s ease-out;
+          margin-bottom: 0;
+        }
+        .form-reveal-group.active {
+          grid-template-rows: 1fr;
+          opacity: 1;
+          visibility: visible;
+          margin-bottom: 20px;
+        }
+        .form-reveal-content {
+          min-height: 0;
         }
 
-        /* --- MODALES Y DETALLES DE EXPOSITOR --- */
+        /* --- MODALES PREMIUM FLUIDOS --- */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(2, 18, 38, 0.9); backdrop-filter: blur(5px);
@@ -108,24 +134,38 @@
             opacity: 0; visibility: hidden; transition: var(--transition);
         }
         .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-content { background: white; padding: 35px; border-radius: 15px; width: 90%; max-width: 500px; transform: scale(0.9); transition: var(--transition); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto;}
+        .modal-content {
+            background: white; padding: 35px; border-radius: 15px; width: 90%; max-width: 500px;
+            transform: scale(0.9); transition: var(--transition);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto;
+        }
         .modal-overlay.active .modal-content { transform: scale(1); }
         .modal-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--bg-dark); margin: 0 0 20px 0; border-bottom: 2px solid var(--gold-light); padding-bottom: 10px;}
         
         /* Modal Info Expositor */
         .bio-text { font-size: 0.95rem; color: #475569; line-height: 1.6; margin-top: 15px; background: #f8fafc; padding: 15px; border-radius: 8px; border-left: 3px solid var(--gold-primary);}
 
-        .loader { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,.3); border-radius: 50%; border-top-color: white; animation: spin 1s ease-in-out infinite; margin-left: 10px; vertical-align: middle;}
-        @keyframes spin { to { transform: rotate(360deg); } }
+        .admin-bar { background: #16a34a; color: white; padding: 12px; text-align: center; font-weight: bold; display: none; position: fixed; bottom: 0; width: 100%; z-index: 3000; }
+        .btn-add-admin { margin-top: 30px; display: none; width: 100%; background: var(--bg-section); color: var(--bg-dark); border: 2px dashed var(--gold-primary); padding: 15px; cursor: pointer; text-transform: uppercase; font-weight: 800; border-radius: 8px;}
+
+        @media (max-width: 768px) {
+            .qa-container { grid-template-columns: 1fr; }
+            .hero h2 { font-size: 2.2rem; }
+            nav { flex-direction: column; gap: 10px; }
+            .modal-content { padding: 25px; }
+        }
     </style>
 </head>
 <body>
+
+<div id="adminNotice" class="admin-bar">⚙️ MODO ORGANIZADOR ACTIVADO - LOS CAMBIOS AFECTAN LA BASE DE DATOS MUNDIAL</div>
 
 <nav>
     <h1>Lex | Universidad de Panamá</h1>
     <div class="nav-links">
         <a href="#expositores">Expositores</a>
         <a href="#agenda">Agenda</a>
+        <a href="#preguntas">Foro de Preguntas</a>
         <a href="#registro" style="background: var(--gold-primary); color: var(--bg-dark); font-weight: 700;">Validar Asistencia</a>
     </div>
 </nav>
@@ -133,8 +173,14 @@
 <section class="hero">
     <div class="hero-content">
         <h4>Facultad de Derecho y Ciencias Políticas</h4>
-        <h2>JORNADA DE PRUEBAS PERICIALES Y DOCUMENTALES.</h2>
+        <h2>Jornada de Pruebas Periciales y Documentales.</h2>
         <p>Realizado por los estudiantes de tercer año y la Mgtr. Gladys Argelis Morán Núñez.</p>
+        
+        <div class="event-details">
+            <div>📅 8 DE JUNIO DEL 2026</div>
+            <div>⏰ DE 6:00 A 8:00 P.M.</div>
+            <div>📍 SALÓN MULTIUSOS, CRUC DE COCLÉ</div>
+        </div>
         <button class="btn-gold" style="width:auto; padding: 15px 40px; font-size: 1rem;" onclick="document.getElementById('registro').scrollIntoView()">Registrar Asistencia</button>
     </div>
 </section>
@@ -155,24 +201,38 @@
                 </select>
             </div>
             
-            <div id="camposRegistro" style="display:none;">
-                <div class="form-group" id="campoAnoEstudiante">
-                    <label>¿A qué año pertenece?</label>
-                    <select id="regAno">
-                        <option value="1er Año">Primer Año</option>
-                        <option value="2do Año">Segundo Año</option>
-                        <option value="3er Año" selected>Tercer Año</option>
-                        <option value="4to Año">Cuarto Año</option>
-                    </select>
+            <!-- CAMPOS PERSONALES (Revelado suave) -->
+            <div id="camposRegistro" class="form-reveal-group">
+                <div class="form-reveal-content">
+                    <div class="form-group"><label>Nombre Completo</label><input type="text" id="regNombre" placeholder="Ej. Claudio Marín"></div>
+                    <div class="form-group"><label>Cédula</label><input type="text" id="regCedula" placeholder="Ej. 8-000-0000"></div>
+                    <div class="form-group"><label>Correo Electrónico</label><input type="email" id="regCorreo" placeholder="ejemplo@correo.com"></div>
                 </div>
-                <div class="form-group"><label>Nombre Completo</label><input type="text" id="regNombre" placeholder="Ej. Claudio Marín"></div>
-                <div class="form-group"><label>Cédula</label><input type="text" id="regCedula" placeholder="Ej. 8-000-0000"></div>
-                <div class="form-group"><label>Correo Electrónico</label><input type="email" id="regCorreo" placeholder="ejemplo@correo.com"></div>
             </div>
 
-            <div class="form-group" id="passArea" style="display:none;">
-                <label>Clave de Organizador</label>
-                <input type="password" id="adminPass" placeholder="Ingrese clave para editar">
+            <!-- Selector de año Universitario (Revelado suave) -->
+            <div id="campoAnoEstudiante" class="form-reveal-group">
+                <div class="form-reveal-content">
+                    <div class="form-group">
+                        <label>¿A qué año pertenece?</label>
+                        <select id="regAno">
+                            <option value="1er Año">Primer Año</option>
+                            <option value="2do Año">Segundo Año</option>
+                            <option value="3er Año" selected>Tercer Año</option>
+                            <option value="4to Año">Cuarto Año</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clave Organizador (Revelado suave) -->
+            <div id="passArea" class="form-reveal-group" style="margin-top:15px;">
+                <div class="form-reveal-content">
+                    <div class="form-group">
+                        <label>Clave de Organizador</label>
+                        <input type="password" id="adminPass" placeholder="Ingrese clave para editar">
+                    </div>
+                </div>
             </div>
             
             <button type="submit" id="btnSubmitLogin" class="btn-gold" style="margin-top: 10px;">Confirmar Asistencia</button>
@@ -188,7 +248,45 @@
     <button class="btn-add-admin admin-only" style="display:none; background:var(--bg-dark); color:var(--gold-light); margin-top:30px;" onclick="openModal('modalAddSpeaker')">➕ AÑADIR NUEVO EXPOSITOR (ADMIN)</button>
 </section>
 
-<!-- MODAL PARA VER DETALLES DEL EXPOSITOR -->
+<!-- SECCIÓN AGENDA -->
+<section id="agenda" class="seccion" style="background: transparent;">
+    <h2 class="titulo-sec">Cronograma Oficial</h2>
+    <div class="linea-oro"></div>
+    <div class="agenda-container">
+        <div id="agendaContainer"></div>
+        <button class="btn-add-admin admin-only" onclick="openModal('modalAgenda')" style="margin-top: 30px;">➕ Agregar Bloque a la Agenda</button>
+    </div>
+</section>
+
+<!-- SECCIÓN PREGUNTAS -->
+<section id="preguntas" class="seccion">
+    <h2 class="titulo-sec">Foro de Preguntas</h2>
+    <div class="linea-oro"></div>
+    <div class="qa-container">
+        <div class="form-panel">
+            <h3 style="margin-top:0; color: var(--bg-dark); font-family: 'Playfair Display', serif; font-size:1.8rem;">Enviar Pregunta</h3>
+            <p style="font-size: 0.95rem; color: #666; margin-bottom: 25px;">Las consultas serán leídas por el moderador en vivo.</p>
+            <div class="form-group">
+                <label>Tu Nombre (Opcional)</label>
+                <input type="text" id="qName" placeholder="Ej. Juan Pérez">
+            </div>
+            <div class="form-group">
+                <label>Dirigido a:</label>
+                <select id="qTarget">
+                    <option value="Mesa General">Mesa General (Todos los expositores)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Tu Pregunta</label>
+                <textarea id="qText" placeholder="Redacta tu consulta de forma clara..."></textarea>
+            </div>
+            <button class="btn-gold" onclick="submitQuestion(event)">Enviar a la Mesa</button>
+        </div>
+        <div class="board-panel" id="questionsBoard"></div>
+    </div>
+</section>
+
+<!-- MODAL PARA VER DETALLES DEL EXPOSITOR (ANIMADO) -->
 <div class="modal-overlay" id="modalViewSpeaker" onclick="closeModals(event)">
     <div class="modal-content">
         <h2 class="modal-title" id="viewSpkName">Nombre</h2>
@@ -219,13 +317,27 @@
     </div>
 </div>
 
+<!-- MODAL PARA AGREGAR AGENDA (ADMIN) -->
+<div class="modal-overlay" id="modalAgenda">
+    <div class="modal-content">
+        <h2 class="modal-title">Añadir Bloque de Tiempo</h2>
+        <div class="form-group"><label>Hora (Ej. 07:15 PM)</label><input type="text" id="addAgTime"></div>
+        <div class="form-group"><label>Actividad / Tema</label><textarea id="addAgEvent"></textarea></div>
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <button class="btn-gold" style="flex:1;" onclick="saveNewAgenda(event)">Guardar</button>
+            <button class="btn-gold" style="flex:1; background: #e2e8f0; color: #333; box-shadow:none;" onclick="closeModals('force')">Cancelar</button>
+        </div>
+    </div>
+</div>
+
 <script>
     // ====== AQUÍ PONES TU NUEVO ENLACE DE APPS SCRIPT ======
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz2WYPjrqvxl-Twy44QwO2y0AKiUSWRNYbRVZezD1o-F8VTGUz4zfmRHF4T5uAdWoqc0Q/exec";
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzOnRajoJINzZ9z6jna14wn1xRgQOX00okbLkTUBdnYR1S7mMlIj4T9g-4VxMp77ljPOg/exec";
     
+    // Base de datos local
     let db = { speakers: [], agenda: [], questions: [] };
 
-    // --- CARGA GLOBAL (Todos ven a los expositores) ---
+    // --- CARGA GLOBAL (Carga inicial para que todos vean a los expositores al entrar) ---
     async function loadGlobalData() {
         try {
             const response = await fetch(APPS_SCRIPT_URL);
@@ -237,40 +349,58 @@
         }
     }
 
-    // --- ENVÍO DE DATOS UNIVERSAL ---
-    async function sendDataToGoogle(sheetName, actionType, rowData, btnElement = null) {
+    // --- ENVÍO DE DATOS UNIVERSAL (Corregido para manejar deleteId correctamente) ---
+    async function sendDataToGoogle(sheetName, actionType, rowData, btnElement = null, deleteId = null) {
         let originalText = "";
         if (btnElement) {
-            originalText = btnElement.innerHTML;
-            btnElement.innerHTML = "Procesando... <span class='loader'></span>";
+            originalText = btnElement.innerText;
+            btnElement.innerText = "Sincronizando Excel...";
             btnElement.disabled = true;
         }
 
-        const payload = { sheet: sheetName, action: actionType, row: rowData };
+        // Estructura exacta que requiere el código Apps Script ACTUALIZADO
+        const payload = {
+            sheet: sheetName,
+            action: actionType,
+            row: rowData,
+            id: deleteId // <--- AÑADIDO PARA BORRADO GLOBAL
+        };
+
         let formData = new FormData();
         formData.append("payload", JSON.stringify(payload));
 
         try {
             await fetch(APPS_SCRIPT_URL, { method: 'POST', body: formData, mode: 'no-cors' });
+            // Al tener no-cors, asumimos éxito si la red no falla
         } catch (error) {
-            console.error(error);
+            console.error("Error de conexión:", error);
+            alert("Hubo un error al conectar con la base de datos.");
         } finally {
-            if (btnElement) { btnElement.innerHTML = originalText; btnElement.disabled = false; }
+            if (btnElement) {
+                btnElement.innerText = originalText;
+                btnElement.disabled = false;
+            }
         }
     }
 
-    // --- LÓGICA DE REGISTRO EN HOJAS ESPECÍFICAS ---
+    // --- LÓGICA DE REGISTRO CON TRANSICIONES SUAVES Y ENRUTAMIENTO ---
     function gestionarCamposLogin() {
         const role = document.getElementById('roleSelect').value;
         const camposReg = document.getElementById('camposRegistro');
         const campoAno = document.getElementById('campoAnoEstudiante');
         const passArea = document.getElementById('passArea');
 
+        // Reiniciamos todas las transiciones
+        camposReg.classList.remove('active');
+        campoAno.classList.remove('active');
+        passArea.classList.remove('active');
+
+        // Activamos los campos correctos con suavidad
         if (role === 'Admin') {
-            passArea.style.display = 'block'; camposReg.style.display = 'none';
+            passArea.classList.add('active');
         } else {
-            passArea.style.display = 'none'; camposReg.style.display = 'block';
-            campoAno.style.display = (role === 'Estudiante') ? 'block' : 'none';
+            camposReg.classList.add('active');
+            if(role === 'Estudiante') campoAno.classList.add('active');
         }
     }
 
@@ -284,17 +414,18 @@
         if(role === 'Admin') {
             if(document.getElementById('adminPass').value === 'Derecho2026') { 
                 localStorage.setItem('isAdmin', 'true');
-                alert("Modo Administrador Activado.");
+                alert("🔐 Acceso Concedido: Modo Organizador activado.");
                 document.getElementById('adminPass').value = '';
-                renderAll(); document.getElementById('expositores').scrollIntoView();
-            } else { alert("Clave incorrecta."); }
+                renderAll();
+                document.getElementById('expositores').scrollIntoView();
+            } else { alert("❌ Contraseña incorrecta."); }
         } else {
             const nombre = document.getElementById('regNombre').value;
             const cedula = document.getElementById('regCedula').value;
             const correo = document.getElementById('regCorreo').value;
             const fecha = new Date().toLocaleString();
 
-            if(!nombre || !cedula || !correo) return alert("Complete sus datos.");
+            if(!nombre || !cedula || !correo) return alert("Por favor, completa tus datos.");
 
             // LÓGICA DE ENRUTAMIENTO INTELIGENTE A GOOGLE SHEETS
             let hojaDestino = "Registros"; // Hoja por defecto si algo falla
@@ -308,13 +439,15 @@
             const datosFila = [fecha, nombre, cedula, correo];
             
             await sendDataToGoogle(hojaDestino, "add", datosFila, btn);
-            alert("✅ Asistencia registrada correctamente en la base de datos de " + hojaDestino);
+            alert("✅ Registro oficial guardado con éxito en la base de datos de " + hojaDestino);
+            
+            // Limpieza suave
             document.getElementById('loginForm').reset();
             gestionarCamposLogin();
         }
     };
 
-    // --- GESTIÓN DE EXPOSITORES ---
+    // --- GESTIÓN DE EXPOSITORES (CON BIOS Y CLICK-PARA-VER) ---
     async function saveNewSpeaker(e) {
         const id = Date.now().toString();
         const name = document.getElementById('addSpkName').value;
@@ -322,58 +455,127 @@
         const bio = document.getElementById('addSpkBio').value || "Información académica pendiente de actualización.";
         const img = document.getElementById('addSpkBase64').value || 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=400&q=80';
         
-        if(!name || !role) return alert("Complete nombre y cargo.");
+        if(!name || !role) return alert("Por favor, llena el nombre y el cargo.");
         
+        // Lo añadimos a la pantalla inmediatamente para fluidez
         db.speakers.push({ id, name, role, img, bio });
         renderAll();
         closeModals('force');
 
-        // Enviar globalmente
+        // Enviar globalmente (Pestaña "Expositores", fila: [ID, Nombre, Cargo, Img, Bio])
         await sendDataToGoogle("Expositores", "add", [id, name, role, img, bio], e.target);
     }
 
+    // Nueva función para ver detalles animados
     function viewSpeakerDetails(id) {
+        // Ignorar si se hizo clic en el botón borrar
+        if(event.target.classList.contains('btn-admin')) return; 
+
         const spk = db.speakers.find(s => s.id === id);
         if(spk) {
             document.getElementById('viewSpkName').innerText = spk.name;
             document.getElementById('viewSpkRole').innerText = spk.role;
             document.getElementById('viewSpkImg').src = spk.img;
-            document.getElementById('viewSpkBio').innerText = spk.bio || "Información en desarrollo.";
-            document.getElementById('modalViewSpeaker').classList.add('active');
+            // CORRECCIÓN BIOS MEJORADA: Usar innerText para preservar saltos de línea del textarea
+            document.getElementById('viewSpkBio').innerText = spk.bio || "No hay información adicional registrada.";
+            openModal('modalViewSpeaker');
         }
     }
 
+    // --- GESTIÓN DE AGENDA ---
+    async function saveNewAgenda(e) {
+        const id = Date.now().toString();
+        const time = document.getElementById('addAgTime').value;
+        const eventText = document.getElementById('addAgEvent').value;
+        
+        if(!time || !eventText) return alert("Llena la hora y la actividad.");
+        
+        db.agenda.push({ id, time, event: eventText });
+        renderAll();
+        closeModals('force');
+
+        await sendDataToGoogle("Agenda", "add", [id, time, eventText], e.target);
+    }
+
+    // --- GESTIÓN DE PREGUNTAS ---
+    async function submitQuestion(e) {
+        const id = Date.now().toString();
+        const author = document.getElementById('qName').value || "Anónimo";
+        const target = document.getElementById('qTarget').value;
+        const question = document.getElementById('qText').value;
+        
+        if(!question) return alert("Debes redactar una pregunta.");
+        
+        db.questions.push({ id, author, target, question });
+        renderAll();
+
+        await sendDataToGoogle("Preguntas", "add", [id, author, question, target], e.target);
+        document.getElementById('qText').value = '';
+    }
+
+    // --- RENDERIZADO VISUAL EN PANTALLA ---
     function renderAll() {
         const isAdmin = localStorage.getItem('isAdmin') === 'true';
+        document.getElementById('adminNotice').style.display = isAdmin ? 'block' : 'none';
         document.querySelectorAll('.admin-only').forEach(el => el.style.display = isAdmin ? 'block' : 'none');
 
+        // Render Expositores
         const sGrid = document.getElementById('speakerGrid');
-        sGrid.innerHTML = '';
-        if(db.speakers.length === 0) {
-            sGrid.innerHTML = '<p style="text-align:center; grid-column: 1/-1;">No hay expositores registrados aún.</p>';
-        } else {
-            db.speakers.forEach(s => {
-                sGrid.innerHTML += `
-                    <div class="speaker-card" onclick="viewSpeakerDetails('${s.id}')">
-                        <img src="${s.img}" class="speaker-img">
-                        <div class="speaker-info">
-                            <h3>${s.name}</h3><p>${s.role}</p>
-                            <span class="click-hint">Toca para ver información</span>
-                            ${isAdmin ? `<button class="btn-admin" onclick="event.stopPropagation(); deleteItem('Expositores', '${s.id}')">Borrar</button>` : ''}
-                        </div>
-                    </div>`;
-            });
-        }
+        sGrid.innerHTML = db.speakers.length ? '' : '<p style="text-align:center; grid-column: 1/-1;">No hay expositores registrados aún.</p>';
+        db.speakers.forEach(s => {
+            sGrid.innerHTML += `
+                <div class="speaker-card" onclick="viewSpeakerDetails('${s.id}')">
+                    <img src="${s.img}" class="speaker-img">
+                    <div class="speaker-info">
+                        <h3>${s.name}</h3><p>${s.role}</p>
+                        <span class="click-hint">Toca para ver información</span>
+                        ${isAdmin ? `<button class="btn-admin" onclick="deleteItem('Expositores', '${s.id}')">Borrar Global</button>` : ''}
+                    </div>
+                </div>`;
+        });
+
+        // Render Agenda
+        const aContainer = document.getElementById('agendaContainer');
+        aContainer.innerHTML = db.agenda.length ? '' : '<p style="text-align:center;">Agenda en construcción...</p>';
+        db.agenda.forEach(a => {
+            aContainer.innerHTML += `
+                <div class="agenda-item">
+                    <div class="agenda-time">${a.time}</div>
+                    <div class="agenda-content"><h4>${a.event}</h4></div>
+                </div>`;
+        });
+
+        // Render Preguntas y actualizar selector
+        const qBoard = document.getElementById('questionsBoard');
+        const qTarget = document.getElementById('qTarget');
+        
+        qTarget.innerHTML = '<option value="Mesa General">Mesa General (Todos)</option>';
+        db.speakers.forEach(s => { qTarget.innerHTML += `<option value="${s.name}">${s.name}</option>`; });
+
+        qBoard.innerHTML = db.questions.length ? '' : '<p style="color:#888; font-style:italic;">Aún no hay preguntas.</p>';
+        db.questions.slice().reverse().forEach(q => {
+            qBoard.innerHTML += `
+                <div class="question-card">
+                    <div class="q-author">👤 ${q.author}</div>
+                    <div class="q-target">📍 Para: ${q.target}</div>
+                    <p class="q-text">"${q.question}"</p>
+                </div>`;
+        });
     }
 
+    // --- SOLUCIÓN AL BUG DE BORRADO ---
     async function deleteItem(sheet, id) {
-        if(confirm("¿Eliminar este registro globalmente?")) {
+        if(confirm("¿Eliminar este registro globalmente? Los demás usuarios verán el cambio al recargar.")) {
+            // Actualización local para rapidez
             if(sheet === 'Expositores') db.speakers = db.speakers.filter(item => item.id !== id);
             renderAll();
-            await sendDataToGoogle(sheet, "delete", null); // Requiere p.id en el script backend modificado
+            
+            // Llama al motor de envío pasándole el ID a borrar en el parámetro final
+            await sendDataToGoogle(sheet, "delete", null, null, id); // <--- AHORA PASAMOS EL ID AL FINAL
         }
     }
 
+    // Utilidades
     function procesarImagenLocal(event) {
         const archivo = event.target.files[0];
         if (archivo) {
