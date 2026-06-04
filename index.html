@@ -260,7 +260,7 @@
     <div class="linea-oro"></div>
     <div class="agenda-container">
         <div id="agendaContainer"></div>
-      <button class="btn-add-admin admin-only" style="display:none; background:var(--bg-dark); color:var(--gold-light); margin-top:30px;" onclick="abrirModalLimpio()">➕ AÑADIR NUEVO EXPOSITOR (ADMIN)</button>
+     <button class="btn-add-admin admin-only" style="display:none; background:var(--bg-dark); color:var(--gold-light); margin-top:30px;" onclick="abrirModalAgenda()">➕ AGREGAR BLOQUE A LA AGENDA</button>
     </div>
 </section>
 
@@ -651,6 +651,15 @@
         if(fileInput) fileInput.value = '';
         
         openModal('modalAddSpeaker');
+    }
+    // --- FUNCIÓN PARA LIMPIAR Y ABRIR MODAL DE AGENDA ---
+    function abrirModalAgenda() {
+        document.getElementById('addAgTime').value = '';
+        document.getElementById('addAgResp').value = '';
+        document.getElementById('addAgEvent').value = '';
+        document.getElementById('addAgTipo').selectedIndex = 0; // Regresa al primer valor
+        
+        openModal('modalAgenda');
     }
     function openModal(id) { document.getElementById(id).classList.add('active'); }
     function closeModals(e) { 
