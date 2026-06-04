@@ -105,9 +105,25 @@
         .seccion { padding: 80px 5%; max-width: 1050px; margin: 0 auto; }
         .titulo-sec { text-align: center; font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 8px; color: var(--bg-dark); }
         .linea-oro { width: 80px; height: 4px; background: linear-gradient(90deg, var(--gold-primary), transparent); margin: 0 auto 50px auto; border-radius: 2px;}
+     /* --- CONTRASTE DE SECCIONES (ZEBRA STRIPING) --- */
+        #registro { background-color: var(--white); }
+        #expositores { background-color: var(--bg-section); }
+        #agenda { background-color: var(--white); border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }
+        #preguntas { background-color: var(--bg-dark); }
+        
+        #preguntas .titulo-sec { color: var(--gold-light); }
 
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
+/* --- ANIMACIÓN DE APARICIÓN SUAVE (SCROLL) --- */
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-in-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
         /* --- EXPOSITORES (EFECTO MAGNÉTICO AAA) --- */
         .speaker-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
         .speaker-card { 
@@ -317,7 +333,7 @@
 <section id="registro" class="seccion">
     <h2 class="titulo-sec">Validación de Asistencia</h2>
     <div class="linea-oro"></div>
-    <div style="max-width: 500px; margin: 0 auto; background: white; padding: 40px; border-radius: 15px; box-shadow: var(--shadow-elegant);">
+    <div class="fade-in-element" style="max-width: 500px; margin: 0 auto; background: white; padding: 40px; border-radius: 15px; box-shadow: var(--shadow-elegant);">
         <form id="loginForm">
             <div class="form-group">
                 <label>Seleccione su perfil</label>
@@ -411,7 +427,7 @@
     <h2 class="titulo-sec">Foro de Preguntas</h2>
     <div class="linea-oro"></div>
     <div class="qa-container" style="display: flex; justify-content: center; flex-wrap: wrap;">
-        <div class="form-panel" style="width: 100%; max-width: 600px;">
+        <div class="form-panel fade-in-element" style="width: 100%; max-width: 600px;">
             <h3 style="margin-top:0; color: var(--bg-dark); font-family: 'Playfair Display', serif; font-size:1.8rem;">Enviar Pregunta</h3>
             <p style="font-size: 0.95rem; color: #666; margin-bottom: 25px;">Las consultas serán leídas por el moderador en vivo.</p>
             <div class="form-group">
@@ -787,7 +803,7 @@
         sGrid.innerHTML = db.speakers.length ? '' : '<p style="text-align:center; grid-column: 1/-1;">No hay expositores registrados aún.</p>';
         db.speakers.forEach(s => {
             sGrid.innerHTML += `
-                <div class="speaker-card" onclick="viewSpeakerDetails('${s.id}', event)">
+                <div class="speaker-card fade-in-element" onclick="viewSpeakerDetails('${s.id}', event)">
                     <img src="${s.img}" class="speaker-img">
                     <div class="speaker-info">
                         <h3>${s.name}</h3><p>${s.role}</p>
@@ -802,7 +818,7 @@
         aContainer.innerHTML = db.agenda.length ? '' : '<p style="text-align:center;">Agenda en construcción...</p>';
         db.agenda.forEach(a => {
             aContainer.innerHTML += `
-                <div class="agenda-item">
+                <div class="agenda-item fade-in-element">
                     <div class="agenda-time">${a.time}</div>
                     <div class="agenda-content">
                         <h4>${a.event}</h4>
@@ -830,6 +846,7 @@
                     <p class="q-text">"${q.question}"</p>
                 </div>`;
         });
+        activarAnimacionesScroll();
     }
 
     // --- SOLUCIÓN AL BUG DE BORRADO ---
@@ -886,7 +903,22 @@
         alert("Has salido del Modo Organizador. Volviendo a la vista de usuario normal.");
         renderAll(); // Recarga la vista para ocultar los botones de editar/borrar
     }
+// --- MOTOR DE ANIMACIONES AL HACER SCROLL ---
+    function activarAnimacionesScroll() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.15 
+        });
 
+        document.querySelectorAll('.fade-in-element').forEach((el) => {
+            observer.observe(el);
+        });
+    }
     window.onload = () => { loadGlobalData(); };
 </script>
 </body>
