@@ -331,14 +331,9 @@
     <div class="modal-content">
         <h2 class="modal-title">Añadir Bloque de Tiempo</h2>
         <div class="form-group"><label>Hora (Ej. 07:15 PM)</label><input type="text" id="addAgTime"></div>
-        <div class="form-group">
+       <div class="form-group">
             <label>Tipo de Actividad</label>
-            <select id="addAgTipo">
-                <option value="Protocolo">Protocolo / Palabras de Apertura</option>
-                <option value="Conferencia">Conferencia / Ponencia</option>
-                <option value="Debate">Mesa Redonda / Debate</option>
-                <option value="Receso">Receso / Coffee Break</option>
-            </select>
+            <input type="text" id="addAgTipo" placeholder="Ej. Protocolo, Clausura, Brindis...">
         </div>
         <div class="form-group"><label>Responsable / Expositor (Opcional)</label><input type="text" id="addAgResp" placeholder="Ej. Mgtr. Gladys Morán"></div>
         <div class="form-group"><label>Detalles / Tema</label><textarea id="addAgEvent" placeholder="Describe de qué tratará..."></textarea></div>
@@ -662,12 +657,12 @@
         
         openModal('modalAddSpeaker');
     }
-    // --- FUNCIÓN PARA LIMPIAR Y ABRIR MODAL DE AGENDA ---
+   // --- FUNCIÓN PARA LIMPIAR Y ABRIR MODAL DE AGENDA ---
     function abrirModalAgenda() {
         document.getElementById('addAgTime').value = '';
         document.getElementById('addAgResp').value = '';
         document.getElementById('addAgEvent').value = '';
-        document.getElementById('addAgTipo').selectedIndex = 0; // Regresa al primer valor
+        document.getElementById('addAgTipo').value = ''; // Ahora se limpia como texto
         
         openModal('modalAgenda');
     }
