@@ -268,8 +268,8 @@
 <section id="preguntas" class="seccion">
     <h2 class="titulo-sec">Foro de Preguntas</h2>
     <div class="linea-oro"></div>
-    <div class="qa-container">
-        <div class="form-panel">
+    <div class="qa-container" style="display: flex; justify-content: center; flex-wrap: wrap;">
+        <div class="form-panel" style="width: 100%; max-width: 600px;">
             <h3 style="margin-top:0; color: var(--bg-dark); font-family: 'Playfair Display', serif; font-size:1.8rem;">Enviar Pregunta</h3>
             <p style="font-size: 0.95rem; color: #666; margin-bottom: 25px;">Las consultas serán leídas por el moderador en vivo.</p>
             <div class="form-group">
@@ -288,7 +288,7 @@
             </div>
             <button class="btn-gold" onclick="submitQuestion(event)">Enviar a la Mesa</button>
         </div>
-        <div class="board-panel" id="questionsBoard"></div>
+       <div class="board-panel admin-only" id="questionsBoard" style="display: none; width: 100%; max-width: 600px; margin-top: 20px;"></div>
     </div>
 </section>
 
