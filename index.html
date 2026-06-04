@@ -154,10 +154,33 @@
         input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold-primary); background: white; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.15); transform: translateY(-3px) scale(1.01);}
         textarea { resize: vertical; min-height: 120px; }
 
-        /* Aceleración explosiva en el despliegue del Formulario */
-        .form-reveal-group { max-height: 0; opacity: 0; visibility: hidden; overflow: hidden; transition: max-height 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), margin 0.5s ease, visibility 0.7s; margin-bottom: 0; }
-        .form-reveal-group.active { max-height: 600px; opacity: 1; visibility: visible; margin-bottom: 25px; }
-        .form-reveal-content { min-height: 0; padding-top: 1px; }
+      /* --- TARJETAS DE PERFIL (ADIÓS MENÚ NATIVO) --- */
+        .role-cards { display: flex; flex-direction: column; gap: 12px; margin-top: 5px; }
+        .role-card { 
+            padding: 16px 20px; border: 2px solid #e2e8f0; border-radius: 12px; 
+            background: #f8fafc; font-weight: 600; color: #475569; 
+            cursor: pointer; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; overflow: hidden;
+        }
+        .role-card:hover { border-color: var(--gold-primary); transform: translateY(-2px); }
+        .role-card.active { 
+            border-color: var(--gold-primary); background: rgba(212, 175, 55, 0.08); 
+            color: var(--bg-dark); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.15);
+        }
+        .role-card.active::before {
+            content: '✓'; position: absolute; right: 20px; color: var(--gold-primary); font-weight: 900; font-size: 1.2rem;
+        }
+
+        /* --- DESPLIEGUE FLUIDO PERFECTO (GRID METHOD) --- */
+        .form-reveal-group { 
+            display: grid; grid-template-rows: 0fr; opacity: 0; visibility: hidden; 
+            transition: grid-template-rows 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, visibility 0.6s; 
+            margin-bottom: 0; padding-top: 0;
+        }
+        .form-reveal-group.active { 
+            grid-template-rows: 1fr; opacity: 1; visibility: visible; margin-bottom: 25px; padding-top: 10px;
+        }
+        .form-reveal-content { overflow: hidden; }
 
         /* --- MODALES PREMIUM CASCADA --- */
         .modal-overlay {
@@ -270,12 +293,18 @@
         <form id="loginForm">
             <div class="form-group">
                 <label>Seleccione su perfil</label>
-                <select id="roleSelect" onchange="gestionarCamposLogin()">
-                    <option value="" disabled selected>Elija una opción...</option>
-                    <option value="Estudiante">Estudiante Universitario</option>
-                    <option value="Profesor">Profesor / Invitado</option>
-                    <option value="Admin">Comité Organizador (Admin)</option>
-                </select>
+               <div class="role-cards">
+            <div class="role-card" onclick="setRole('Estudiante', this)">👨‍🎓 Estudiante Universitario</div>
+            <div class="role-card" onclick="setRole('Profesor', this)">🎓 Profesor / Invitado</div>
+            <div class="role-card" onclick="setRole('Admin', this)">⚙️ Comité Organizador (Admin)</div>
+        </div>
+        
+        <select id="roleSelect" onchange="gestionarCamposLogin()" style="display:none;">
+            <option value="">Elija una opción...</option>
+            <option value="Estudiante">Estudiante Universitario</option>
+            <option value="Profesor">Profesor</option>
+            <option value="Admin">Admin</option>
+        </select>
             </div>
             
             <!-- CAMPOS PERSONALES (Revelado suave) -->
@@ -416,6 +445,22 @@
 </div>
 
 <script>
+    // --- CONTROLADOR DE TARJETAS DE PERFIL ---
+    function setRole(value, element) {
+        // Apagar todas las tarjetas
+        document.querySelectorAll('.role-card').forEach(card => card.classList.remove('active'));
+        // Encender la tarjeta tocada
+        element.classList.add('active');
+        
+        // Actualizar el sistema de fondo y desencadenar tu animación
+        const select = document.getElementById('roleSelect');
+        select.value = value;
+        
+        // Pequeño retraso para que el navegador procese la tarjeta antes de abrir el formulario (evita tirones)
+        setTimeout(() => {
+            select.dispatchEvent(new Event('change'));
+        }, 50);
+    }
     // --- INTERCEPTOR DE NOTIFICACIONES TOAST ---
     window.alert = function(mensaje) {
         const container = document.getElementById('toastContainer');
