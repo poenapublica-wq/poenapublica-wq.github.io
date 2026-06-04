@@ -597,14 +597,17 @@
                 </div>`;
         });
 
-        // Render Agenda
+     // Render Agenda
         const aContainer = document.getElementById('agendaContainer');
         aContainer.innerHTML = db.agenda.length ? '' : '<p style="text-align:center;">Agenda en construcción...</p>';
         db.agenda.forEach(a => {
             aContainer.innerHTML += `
                 <div class="agenda-item">
                     <div class="agenda-time">${a.time}</div>
-                    <div class="agenda-content"><h4>${a.event}</h4></div>
+                    <div class="agenda-content">
+                        <h4>${a.event}</h4>
+                        ${isAdmin ? `<button class="btn-admin" style="width: auto; margin-top: 10px;" onclick="deleteItem('Agenda', '${a.id}')">Borrar Bloque</button>` : ''}
+                    </div>
                 </div>`;
         });
 
@@ -631,6 +634,7 @@
         if(confirm("¿Eliminar este registro globalmente? Los demás usuarios verán el cambio al recargar.")) {
             // Actualización local para rapidez
             if(sheet === 'Expositores') db.speakers = db.speakers.filter(item => item.id !== id);
+            if(sheet === 'Agenda') db.agenda = db.agenda.filter(item => item.id !== id);
             renderAll();
             
             // Llama al motor de envío pasándole el ID a borrar en el parámetro final
