@@ -18,7 +18,9 @@
             --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--bg-section); color: var(--text-dark); overflow-x: hidden; scroll-behavior: smooth;}
+        /* CORRECCIÓN 1: Separación del smooth scrolling */
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--bg-section); color: var(--text-dark); overflow-x: hidden; }
 
         /* --- NAVEGACIÓN STILO PREMIUM --- */
         nav { 
@@ -184,7 +186,8 @@
             <div>⏰ DE 6:00 A 8:00 P.M.</div>
             <div>📍 SALÓN MULTIUSOS, CRUC DE COCLÉ</div>
         </div>
-        <button class="btn-gold" style="width:auto; padding: 15px 40px; font-size: 1rem;" onclick="document.getElementById('registro').scrollIntoView()">Registrar Asistencia</button>
+        <!-- CORRECCIÓN 2: Botón principal actualizado -->
+        <button class="btn-gold" style="width:auto; padding: 15px 40px; font-size: 1rem;" onclick="window.location.href='#registro'">Registrar Asistencia</button>
     </div>
 </section>
 
@@ -442,7 +445,8 @@
                 alert("🔐 Acceso Concedido: Modo Organizador activado.");
                 document.getElementById('adminPass').value = '';
                 renderAll();
-                document.getElementById('expositores').scrollIntoView();
+                // CORRECCIÓN 3: Redirección segura para móviles
+                window.location.href = '#expositores';
             } else { 
                 alert("❌ Contraseña de administrador incorrecta."); 
             }
@@ -480,7 +484,9 @@
             alert("✅ Validación académica registrada con éxito en la base de datos de " + hojaDestino);
             document.getElementById('loginForm').reset();
             gestionarCamposLogin();
-            document.getElementById('expositores').scrollIntoView();
+            
+            // CORRECCIÓN 3: Redirección segura para móviles
+            window.location.href = '#expositores';
         }
     };
     // --- GESTIÓN DE EXPOSITORES (CON BIOS Y CLICK-PARA-VER) ---
