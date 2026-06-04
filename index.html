@@ -347,12 +347,23 @@
                 <div class="form-reveal-content">
                     <div class="form-group">
                         <label>¿A qué año pertenece?</label>
-                        <select id="regAno">
-                            <option value="1er Año">Primer Año</option>
-                            <option value="2do Año">Segundo Año</option>
-                            <option value="3er Año" selected>Tercer Año</option>
-                            <option value="4to Año">Cuarto Año</option>
-                        </select>
+                      <div class="premium-dropdown" onclick="this.classList.toggle('open')">
+            <span id="anoDropdownText">Tercer Año</span>
+            <span class="arrow">▼</span>
+            <div class="premium-dropdown-list">
+                <div class="dropdown-item" onclick="seleccionarAno('Primer Año', '1er Año')">Primer Año</div>
+                <div class="dropdown-item" onclick="seleccionarAno('Segundo Año', '2do Año')">Segundo Año</div>
+                <div class="dropdown-item" onclick="seleccionarAno('Tercer Año', '3er Año')">Tercer Año</div>
+                <div class="dropdown-item" onclick="seleccionarAno('Cuarto Año', '4to Año')">Cuarto Año</div>
+            </div>
+        </div>
+        
+        <select id="regAno" style="display:none;">
+            <option value="1er Año">Primer Año</option>
+            <option value="2do Año">Segundo Año</option>
+            <option value="3er Año" selected>Tercer Año</option>
+            <option value="4to Año">Cuarto Año</option>
+        </select>
                     </div>
                 </div>
             </div>
@@ -501,6 +512,11 @@
     function seleccionarDestinatario(nombre) {
         document.getElementById('qDropdownText').innerText = nombre;
         document.getElementById('qTarget').value = nombre;
+    }
+    // --- CONTROLADOR DEL DROPDOWN DE AÑO ---
+    function seleccionarAno(textoVisible, valorBaseDatos) {
+        document.getElementById('anoDropdownText').innerText = textoVisible; 
+        document.getElementById('regAno').value = valorBaseDatos; 
     }
 
     // --- LIMPIADOR DE CACHÉ GLOBAL (Evita todo el autocompletado en la página) ---
