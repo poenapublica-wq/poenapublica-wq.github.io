@@ -484,6 +484,7 @@
         }
     };
     // --- GESTIÓN DE EXPOSITORES (CON BIOS Y CLICK-PARA-VER) ---
+    // --- GESTIÓN DE EXPOSITORES (CON BIOS Y CLICK-PARA-VER) ---
     async function saveNewSpeaker(e) {
         const id = Date.now().toString();
         const name = document.getElementById('addSpkName').value;
@@ -500,19 +501,26 @@
 
         // Enviar globalmente (Pestaña "Expositores", fila: [ID, Nombre, Cargo, Img, Bio])
         await sendDataToGoogle("Expositores", "add", [id, name, role, img, bio], e.target);
+
+        // --- SOLUCIÓN: Limpiar los campos después de guardar ---
+        document.getElementById('addSpkName').value = '';
+        document.getElementById('addSpkRole').value = '';
+        document.getElementById('addSpkBio').value = '';
+        document.getElementById('addSpkBase64').value = '';
+        const fileInput = document.querySelector('input[type="file"]');
+        if(fileInput) fileInput.value = '';
     }
 
-    // Nueva función para ver detalles animados
-    function viewSpeakerDetails(id) {
+   // Nueva función para ver detalles animados
+    function viewSpeakerDetails(id, e) {
         // Ignorar si se hizo clic en el botón borrar
-        if(event.target.classList.contains('btn-admin')) return; 
+        if(e && e.target && e.target.classList.contains('btn-admin')) return; 
 
         const spk = db.speakers.find(s => s.id === id);
         if(spk) {
             document.getElementById('viewSpkName').innerText = spk.name;
             document.getElementById('viewSpkRole').innerText = spk.role;
             document.getElementById('viewSpkImg').src = spk.img;
-            // CORRECCIÓN BIOS MEJORADA: Usar innerText para preservar saltos de línea del textarea
             document.getElementById('viewSpkBio').innerText = spk.bio || "No hay información adicional registrada.";
             openModal('modalViewSpeaker');
         }
@@ -574,7 +582,7 @@
         sGrid.innerHTML = db.speakers.length ? '' : '<p style="text-align:center; grid-column: 1/-1;">No hay expositores registrados aún.</p>';
         db.speakers.forEach(s => {
             sGrid.innerHTML += `
-                <div class="speaker-card" onclick="viewSpeakerDetails('${s.id}')">
+                <div class="speaker-card" onclick="viewSpeakerDetails('${s.id}', event)">
                     <img src="${s.img}" class="speaker-img">
                     <div class="speaker-info">
                         <h3>${s.name}</h3><p>${s.role}</p>
