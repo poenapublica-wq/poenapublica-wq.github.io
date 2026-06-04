@@ -179,8 +179,10 @@
         }
         .form-reveal-group.active { 
             grid-template-rows: 1fr; opacity: 1; visibility: visible; margin-bottom: 25px; padding-top: 10px;
+            position: relative; z-index: 50; /* Mantiene el panel por encima del botón inferior */
         }
         .form-reveal-content { overflow: hidden; }
+        .form-reveal-group.active .form-reveal-content { overflow: visible; /* Libera las piernas del menú flotante */ }
 
      /* --- DROPDOWN PREMIUM PARA PREGUNTAS --- */
         .premium-dropdown {
