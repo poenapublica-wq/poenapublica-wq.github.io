@@ -260,7 +260,7 @@
     <div class="linea-oro"></div>
     <div class="agenda-container">
         <div id="agendaContainer"></div>
-        <button class="btn-add-admin admin-only" onclick="openModal('modalAgenda')" style="margin-top: 30px;">➕ Agregar Bloque a la Agenda</button>
+      <button class="btn-add-admin admin-only" style="display:none; background:var(--bg-dark); color:var(--gold-light); margin-top:30px;" onclick="abrirModalLimpio()">➕ AÑADIR NUEVO EXPOSITOR (ADMIN)</button>
     </div>
 </section>
 
@@ -516,7 +516,8 @@
         // Ignorar si se hizo clic en el botón borrar
         if(e && e.target && e.target.classList.contains('btn-admin')) return; 
 
-        const spk = db.speakers.find(s => s.id === id);
+        // CORRECCIÓN: Convertimos ambos a texto (String) para que siempre coincidan
+        const spk = db.speakers.find(s => String(s.id) === String(id));
         if(spk) {
             document.getElementById('viewSpkName').innerText = spk.name;
             document.getElementById('viewSpkRole').innerText = spk.role;
@@ -524,9 +525,7 @@
             document.getElementById('viewSpkBio').innerText = spk.bio || "No hay información adicional registrada.";
             openModal('modalViewSpeaker');
         }
-    }
-
-  // --- GESTIÓN DE AGENDA (ACTUALIZADA CON MÁS DETALLES) ---
+    }  // --- GESTIÓN DE AGENDA (ACTUALIZADA CON MÁS DETALLES) ---
     async function saveNewAgenda(e) {
         const id = Date.now().toString();
         const time = document.getElementById('addAgTime').value;
@@ -642,7 +641,17 @@
             lector.readAsDataURL(archivo);
         }
     }
-
+// --- FUNCIÓN PARA LIMPIAR Y ABRIR MODAL DE NUEVO EXPOSITOR ---
+    function abrirModalLimpio() {
+        document.getElementById('addSpkName').value = '';
+        document.getElementById('addSpkRole').value = '';
+        document.getElementById('addSpkBio').value = '';
+        document.getElementById('addSpkBase64').value = '';
+        const fileInput = document.querySelector('input[type="file"]');
+        if(fileInput) fileInput.value = '';
+        
+        openModal('modalAddSpeaker');
+    }
     function openModal(id) { document.getElementById(id).classList.add('active'); }
     function closeModals(e) { 
         if(e === 'force' || e.target.classList.contains('modal-overlay')) {
