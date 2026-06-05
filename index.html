@@ -570,7 +570,8 @@
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzOnRajoJINzZ9z6jna14wn1xRgQOX00okbLkTUBdnYR1S7mMlIj4T9g-4VxMp77ljPOg/exec";
     
     // Base de datos local
-    let db = { speakers: [], agenda: [], questions: [] };
+  let db = { speakers: [], agenda: [], questions: [] };
+    let idExpositorEditando = null;
 
     // --- CARGA GLOBAL (Carga inicial para que todos vean a los expositores al entrar) ---
     async function loadGlobalData() {
@@ -707,30 +708,48 @@
     };
     // --- GESTIÓN DE EXPOSITORES (CON BIOS Y CLICK-PARA-VER) ---
     // --- GESTIÓN DE EXPOSITORES (CON BIOS Y CLICK-PARA-VER) ---
+  // --- GESTIÓN DE EXPOSITORES (CREAR Y EDITAR) ---
     async function saveNewSpeaker(e) {
-        const id = Date.now().toString();
+        // Si estamos editando usamos ese ID, si no, creamos uno nuevo
+        const isEditing = idExpositorEditando !== null;
+        const id = isEditing ? idExpositorEditando : Date.now().toString();
+        
         const name = document.getElementById('addSpkName').value;
         const role = document.getElementById('addSpkRole').value;
         const bio = document.getElementById('addSpkBio').value || "Información académica pendiente de actualización.";
-       const img = document.getElementById('addSpkBase64').value || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(name) + '&background=021226&color=D4AF37&size=400&font-size=0.35&bold=true';
+        const img = document.getElementById('addSpkBase64').value || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(name) + '&background=021226&color=D4AF37&size=400&font-size=0.35&bold=true';
         
         if(!name || !role) return alert("Por favor, llena el nombre y el cargo.");
         
-        // Lo añadimos a la pantalla inmediatamente para fluidez
-        db.speakers.push({ id, name, role, img, bio });
+        if (isEditing) {
+            // ACTUALIZAR LOCALMENTE
+            const index = db.speakers.findIndex(s => String(s.id) === String(id));
+            if (index !== -1) {
+                db.speakers[index] = { id, name, role, img, bio };
+            }
+            // OJO: Tendrás que asegurarte de que tu archivo de Apps Script maneje la acción "update"
+            await sendDataToGoogle("Expositores", "update", [id, name, role, img, bio], e.target, id);
+            alert("Expositor actualizado correctamente.");
+        } else {
+            // CREAR NUEVO
+            db.speakers.push({ id, name, role, img, bio });
+            await sendDataToGoogle("Expositores", "add", [id, name, role, img, bio], e.target);
+        }
+
         renderAll();
         closeModals('force');
 
-        // Enviar globalmente (Pestaña "Expositores", fila: [ID, Nombre, Cargo, Img, Bio])
-        await sendDataToGoogle("Expositores", "add", [id, name, role, img, bio], e.target);
-
-        // --- SOLUCIÓN: Limpiar los campos después de guardar ---
+        // Limpiar para la próxima vez
         document.getElementById('addSpkName').value = '';
         document.getElementById('addSpkRole').value = '';
         document.getElementById('addSpkBio').value = '';
         document.getElementById('addSpkBase64').value = '';
         const fileInput = document.querySelector('input[type="file"]');
         if(fileInput) fileInput.value = '';
+        
+        // Restaurar el estado original del modal
+        document.querySelector('#modalAddSpeaker .modal-title').innerText = "Registrar Expositor";
+        idExpositorEditando = null; 
     }
 
    // Nueva función para ver detalles animados
@@ -808,7 +827,12 @@
                     <div class="speaker-info">
                         <h3>${s.name}</h3><p>${s.role}</p>
                         <span class="click-hint">Ver Perfil Completo <span>→</span></span>
-                        ${isAdmin ? `<button class="btn-admin" onclick="deleteItem('Expositores', '${s.id}')">Borrar Global</button>` : ''}
+                       ${isAdmin ? `
+                        <div style="display: flex; gap: 10px; margin-top: 15px;">
+                            <button class="btn-admin" style="background:var(--gold-primary); color:var(--bg-dark); border:none; margin-top:0;" onclick="prepararEdicionExpositor('${s.id}', event)">Editar</button>
+                            <button class="btn-admin" style="margin-top:0;" onclick="deleteItem('Expositores', '${s.id}')">Borrar Global</button>
+                        </div>
+                        ` : ''}
                     </div>
                 </div>`;
         });
@@ -871,6 +895,26 @@
             lector.readAsDataURL(archivo);
         }
     }
+    // --- FUNCIÓN PARA PREPARAR LA EDICIÓN DE UN EXPOSITOR ---
+    function prepararEdicionExpositor(id, event) {
+        if(event) event.stopPropagation(); // Evita que se abra el modal de "Ver Detalles"
+
+        const spk = db.speakers.find(s => String(s.id) === String(id));
+        if(spk) {
+            idExpositorEditando = id; // Guardamos el ID del que estamos editando
+            
+            // Llenamos el formulario con los datos actuales
+            document.getElementById('addSpkName').value = spk.name;
+            document.getElementById('addSpkRole').value = spk.role;
+            document.getElementById('addSpkBio').value = spk.bio !== "Información académica pendiente de actualización." ? spk.bio : "";
+            document.getElementById('addSpkBase64').value = spk.img.includes('ui-avatars.com') ? "" : spk.img; 
+            
+            // Cambiamos el título del Modal
+            document.querySelector('#modalAddSpeaker .modal-title').innerText = "Editar Expositor";
+            
+            openModal('modalAddSpeaker');
+        }
+    }
 // --- FUNCIÓN PARA LIMPIAR Y ABRIR MODAL DE NUEVO EXPOSITOR ---
     function abrirModalLimpio() {
         document.getElementById('addSpkName').value = '';
@@ -879,6 +923,9 @@
         document.getElementById('addSpkBase64').value = '';
         const fileInput = document.querySelector('input[type="file"]');
         if(fileInput) fileInput.value = '';
+        
+        document.querySelector('#modalAddSpeaker .modal-title').innerText = "Registrar Expositor";
+        idExpositorEditando = null;
         
         openModal('modalAddSpeaker');
     }
