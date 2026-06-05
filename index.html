@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jornada de Pruebas Periciales 2026 - UP</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
  <style>
         :root {
             /* Paleta Oficial del Flyer Institucional */
@@ -478,7 +479,11 @@
         <h2 class="modal-title">Registrar Expositor</h2>
         <div class="form-group"><label>Nombre del Magistrado / Perito</label><input type="text" id="addSpkName"></div>
         <div class="form-group"><label>Cargo o Especialidad</label><input type="text" id="addSpkRole"></div>
-        <div class="form-group"><label>Reseña / Biografía (Opcional)</label><textarea id="addSpkBio" placeholder="Redacta la experiencia profesional..."></textarea></div>
+       <div class="form-group">
+    <label>Desarrollo del Perfil Académico y Profesional</label>
+    <div id="editor-container" style="height: 200px; background-color: white; border-radius: 4px;"></div>
+    <input type="hidden" id="addSpkBio">
+</div>
         <div class="form-group">
             <label>Fotografía (JPG/PNG)</label>
             <input type="file" accept="image/*" onchange="procesarImagenLocal(event)">
@@ -537,10 +542,8 @@
         document.getElementById('regAno').value = valorBaseDatos; 
     }
 
-    // --- LIMPIADOR DE CACHÉ GLOBAL (Evita todo el autocompletado en la página) ---
-    window.onload = () => {
-        document.querySelectorAll('input, textarea').forEach(campo => campo.setAttribute('autocomplete', 'off'));
-    };
+    
+  
     // --- INTERCEPTOR DE NOTIFICACIONES TOAST ---
     window.alert = function(mensaje) {
         const container = document.getElementById('toastContainer');
@@ -709,7 +712,7 @@
     // --- GESTIÓN DE EXPOSITORES (CON BIOS Y CLICK-PARA-VER) ---
     // --- GESTIÓN DE EXPOSITORES (CON BIOS Y CLICK-PARA-VER) ---
   // --- GESTIÓN DE EXPOSITORES (CREAR Y EDITAR) ---
-    async function saveNewSpeaker(e) {
+     async function saveNewSpeaker(e) {
         // Si estamos editando usamos ese ID, si no, creamos uno nuevo
         const isEditing = idExpositorEditando !== null;
         const id = isEditing ? idExpositorEditando : Date.now().toString();
@@ -743,6 +746,7 @@
         document.getElementById('addSpkName').value = '';
         document.getElementById('addSpkRole').value = '';
         document.getElementById('addSpkBio').value = '';
+        quill.root.innerHTML = '';
         document.getElementById('addSpkBase64').value = '';
         const fileInput = document.querySelector('input[type="file"]');
         if(fileInput) fileInput.value = '';
@@ -763,7 +767,7 @@
             document.getElementById('viewSpkName').innerText = spk.name;
             document.getElementById('viewSpkRole').innerText = spk.role;
             document.getElementById('viewSpkImg').src = spk.img;
-            document.getElementById('viewSpkBio').innerText = spk.bio || "No hay información adicional registrada.";
+         document.getElementById('viewSpkBio').innerHTML = spk.bio || "No hay información adicional registrada.";
             openModal('modalViewSpeaker');
         }
     }  // --- GESTIÓN DE AGENDA (ACTUALIZADA CON MÁS DETALLES) ---
@@ -906,7 +910,9 @@
             // Llenamos el formulario con los datos actuales
             document.getElementById('addSpkName').value = spk.name;
             document.getElementById('addSpkRole').value = spk.role;
-            document.getElementById('addSpkBio').value = spk.bio !== "Información académica pendiente de actualización." ? spk.bio : "";
+            const biografiaGuardada = spk.bio !== "Información académica pendiente de actualización." ? spk.bio : "";
+document.getElementById('addSpkBio').value = biografiaGuardada;
+quill.root.innerHTML = biografiaGuardada; // Esto llena el editor visual con lo que ya habías escrito
             document.getElementById('addSpkBase64').value = spk.img.includes('ui-avatars.com') ? "" : spk.img; 
             
             // Cambiamos el título del Modal
@@ -920,6 +926,7 @@
         document.getElementById('addSpkName').value = '';
         document.getElementById('addSpkRole').value = '';
         document.getElementById('addSpkBio').value = '';
+        quill.root.innerHTML = '';
         document.getElementById('addSpkBase64').value = '';
         const fileInput = document.querySelector('input[type="file"]');
         if(fileInput) fileInput.value = '';
@@ -966,7 +973,32 @@
             observer.observe(el);
         });
     }
-    window.onload = () => { loadGlobalData(); };
+  window.onload = () => { 
+    document.querySelectorAll('input, textarea').forEach(campo => campo.setAttribute('autocomplete', 'off'));
+    loadGlobalData(); 
+};
+</script>
+    <!-- Cargar la librería Quill -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<script>
+  var quill = new Quill('#editor-container', {
+    theme: 'snow',
+    modules: {
+      toolbar: [
+        [{ 'header': [1, 2, 3, false] }],
+        ['bold', 'italic', 'underline'],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        ['clean']
+      ]
+    },
+    placeholder: 'Escribe aquí y utiliza las herramientas de arriba para dar formato...'
+  });
+
+  // Sincronizar el editor con el input oculto
+  quill.on('text-change', function() {
+    document.getElementById('addSpkBio').value = quill.root.innerHTML;
+  });
 </script>
 </body>
 </html>
