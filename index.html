@@ -286,6 +286,57 @@
         }
         .toast.show { transform: translateY(0); opacity: 1; }
         .toast.error { border-left-color: #ef4444; }
+     /* ===================================================
+   MEJORAS PREMIUM (AGENDA, PREGUNTAS, EXPOSITORES)
+   =================================================== */
+
+/* 1. AGENDA: Estilo "Línea de Tiempo" (Timeline) Elegante y Alineado */
+.agenda-container { background: transparent; box-shadow: none; padding: 10px 5%; border-left: none; }
+.agenda-item { display: flex; align-items: stretch; padding: 0; margin-bottom: 25px; border: none; position: relative; }
+.agenda-item:hover { background: transparent; transform: translateX(5px); border: none; padding-left: 0; }
+.agenda-time { 
+    min-width: 170px; /* Evita que el texto se rompa hacia abajo */
+    text-align: right; /* Alinea el texto a la derecha contra la línea */
+    font-weight: 900; color: var(--gold-primary); font-size: 1.05rem; 
+    padding-right: 30px; padding-top: 25px; position: relative;
+}
+/* Punto del timeline */
+.agenda-time::after {
+    content: ''; position: absolute; right: -7px; top: 30px; width: 14px; height: 14px;
+    background: var(--bg-dark); border: 3px solid var(--gold-primary); border-radius: 50%; z-index: 2;
+}
+.agenda-content { 
+    flex-grow: 1; padding: 25px 30px; background: white; border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-left: 4px solid var(--bg-dark);
+    margin-left: 15px; position: relative;
+}
+/* Línea vertical del timeline */
+.agenda-content::before {
+    content: ''; position: absolute; left: -22px; top: 0; bottom: -25px; width: 2px;
+    background: rgba(212, 175, 55, 0.3); z-index: 1;
+}
+.agenda-item:last-child .agenda-content::before { bottom: 0; }
+.agenda-content h4 { font-size: 1.15rem; color: #1e293b; line-height: 1.6; font-weight: 600;}
+
+/* 2. EXPOSITORES: Tipografía más limpia y seria */
+.speaker-info h3 { font-size: 1.6rem; letter-spacing: -0.5px; margin-bottom: 4px; }
+.speaker-info p { color: #64748b; font-size: 0.85rem; font-weight: 600; text-transform: none; margin-bottom: 20px;}
+.click-hint { background: #f8fafc; padding: 8px 18px; border-radius: 30px; border: 1px solid #e2e8f0; font-size: 0.7rem; }
+.speaker-card:hover .click-hint { background: var(--gold-primary); color: var(--bg-dark); border-color: var(--gold-primary); }
+
+/* 3. FORO DE PREGUNTAS: Recuadro más estilizado y amplio */
+.form-panel { padding: 50px; border-radius: 24px; border-top: none; box-shadow: 0 25px 50px rgba(2, 18, 38, 0.1); max-width: 700px !important; }
+.form-panel h3 { text-align: center; }
+.form-panel p { text-align: center; margin-bottom: 35px; }
+
+/* 4. PREGUNTAS (VISTA ADMIN): Estilo de "Tarjetas de Casos" */
+.question-card { border-left: none; border-top: 4px solid var(--gold-primary); background: linear-gradient(to bottom, #ffffff, #f8fafc); border-radius: 16px; }
+.q-author { font-size: 1.1rem; color: var(--bg-dark); margin-bottom: 12px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; }
+.q-target { background: var(--bg-dark); color: var(--gold-primary); padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; letter-spacing: 1px; display: inline-block; }
+.q-text { font-size: 1.15rem; font-weight: 500; color: #1e293b; margin-top: 15px; font-style: normal; }
+
+/* 5. BOTONES ADMIN: Más discretos */
+.btn-admin { border-radius: 20px; font-size: 0.75rem; padding: 6px 15px; letter-spacing: 0; }
     </style>
 </head>
 <body>
@@ -339,10 +390,10 @@
             <div class="form-group">
                 <label>Seleccione su perfil</label>
                <div class="role-cards">
-            <div class="role-card" onclick="setRole('Estudiante', this)">👨‍🎓 Estudiante Universitario</div>
-            <div class="role-card" onclick="setRole('Profesor', this)">🎓 Profesor / Invitado</div>
-            <div class="role-card" onclick="setRole('Admin', this)">⚙️ Comité Organizador (Admin)</div>
-        </div>
+    <div class="role-card" onclick="setRole('Estudiante', this)">Estudiante Universitario</div>
+    <div class="role-card" onclick="setRole('Profesor', this)">Profesor / Invitado Especial</div>
+    <div class="role-card" onclick="setRole('Admin', this)">Comité Organizador (Admin)</div>
+</div>
         
         <select id="roleSelect" onchange="gestionarCamposLogin()" style="display:none;">
             <option value="">Elija una opción...</option>
@@ -771,6 +822,7 @@
             openModal('modalViewSpeaker');
         }
     }  // --- GESTIÓN DE AGENDA (ACTUALIZADA CON MÁS DETALLES) ---
+ // --- GESTIÓN DE AGENDA (FLEXIBLE Y SIN OBLIGACIONES ABSURDAS) ---
     async function saveNewAgenda(e) {
         const id = Date.now().toString();
         const time = document.getElementById('addAgTime').value;
@@ -778,27 +830,32 @@
         const resp = document.getElementById('addAgResp').value;
         const detalles = document.getElementById('addAgEvent').value;
         
-        if(!time || !detalles) return alert("Llena la hora y los detalles de la actividad.");
+        // AHORA SOLO LA HORA ES OBLIGATORIA
+        if(!time) return alert("⚠️ La hora del bloque es obligatoria para la agenda.");
         
-        // Unimos todas las opciones en un formato elegante para mostrarlo y enviarlo al Excel
-        let eventText = `[${tipo}] ${detalles}`;
-        if(resp) {
-            eventText += `\n👤 A cargo de: ${resp}`;
-        }
+        // Construcción inteligente del texto (omite lo que esté vacío)
+        let eventText = "";
+        if (tipo) eventText += `[${tipo}] `;
+        if (detalles) eventText += `${detalles}`;
+        
+        // Si no pusieron ni tipo ni detalle, le damos un título por defecto
+        if (!tipo && !detalles) eventText += `Actividad Programada`; 
+        
+        if (resp) eventText += `\n👤 A cargo de: ${resp}`;
         
         db.agenda.push({ id, time, event: eventText });
         renderAll();
         closeModals('force');
 
-        // Enviar globalmente (Pestaña "Agenda")
+        // Enviar globalmente al Excel
         await sendDataToGoogle("Agenda", "add", [id, time, eventText], e.target);
 
-        // Limpiar los campos después de guardar para que quede en blanco para la próxima
+        // Limpiar los campos
         document.getElementById('addAgTime').value = '';
         document.getElementById('addAgResp').value = '';
         document.getElementById('addAgEvent').value = '';
+        document.getElementById('addAgTipo').value = '';
     }
-
     // --- GESTIÓN DE PREGUNTAS ---
     async function submitQuestion(e) {
         const id = Date.now().toString();
