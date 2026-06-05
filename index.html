@@ -98,9 +98,8 @@
             100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); } 
         }
 
-        .btn-admin { background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-top: 10px; width: 100%; font-weight: bold; transition: var(--transition);}
-        .btn-admin:hover { background: #dc2626; transform: scale(1.03); }
-
+.btn-admin { background: transparent; color: #ef4444; border: 1px solid #ef4444; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; margin-top: 15px; width: 100%; font-weight: bold; transition: var(--transition); text-transform: uppercase; letter-spacing: 0.5px;}
+.btn-admin:hover { background: #ef4444; color: white; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2); }
         /* --- ESTRUCTURA GENERAL --- */
         .seccion { padding: 80px 5%; max-width: 1050px; margin: 0 auto; }
         .titulo-sec { text-align: center; font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 8px; color: var(--bg-dark); }
@@ -133,12 +132,13 @@
             border: 1px solid rgba(255,255,255,0.5); animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
         }
         .speaker-card:hover { transform: translateY(-12px) scale(1.03); box-shadow: var(--shadow-hover); border-color: var(--gold-light); z-index: 10;}
-        .speaker-img { width: 100%; height: 280px; object-fit: cover; object-position: top; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .speaker-card:hover .speaker-img { transform: scale(1.08); }
-        .speaker-info { padding: 25px 20px; text-align: center; background: linear-gradient(to top, #ffffff 80%, rgba(255,255,255,0.9)); position: relative; }
-        .speaker-info h3 { margin: 0; font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--bg-dark); }
-        .speaker-info p { color: var(--gold-primary); font-size: 0.85rem; font-weight: 800; text-transform: uppercase; margin: 8px 0 0 0; letter-spacing: 0.5px;}
-        .click-hint { font-size: 0.75rem; color: #94a3b8; margin-top: 12px; display: inline-block; font-style: italic; background: #f1f5f9; padding: 4px 12px; border-radius: 20px;}
+      .speaker-img { width: 100%; height: 220px; object-fit: cover; object-position: top; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); border-bottom: 3px solid var(--gold-primary); }
+.speaker-card:hover .speaker-img { transform: scale(1.05); }
+.speaker-info { padding: 30px 20px; text-align: center; background: var(--white); position: relative; }
+.speaker-info h3 { margin: 0; font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--bg-dark); font-weight: 900;}
+.speaker-info p { color: var(--gold-primary); font-size: 0.85rem; font-weight: 800; text-transform: uppercase; margin: 6px 0 15px 0; letter-spacing: 1px;}
+.click-hint { font-size: 0.75rem; color: #64748b; display: inline-flex; align-items: center; gap: 5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s;}
+.speaker-card:hover .click-hint { color: var(--gold-primary); }
 
         /* --- AGENDA --- */
         .agenda-container { background: white; border-radius: 16px; box-shadow: var(--shadow-elegant); padding: 30px; border-left: 5px solid var(--gold-primary); animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards; animation-delay: 0.2s;}
@@ -712,7 +712,7 @@
         const name = document.getElementById('addSpkName').value;
         const role = document.getElementById('addSpkRole').value;
         const bio = document.getElementById('addSpkBio').value || "Información académica pendiente de actualización.";
-        const img = document.getElementById('addSpkBase64').value || 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=400&q=80';
+       const img = document.getElementById('addSpkBase64').value || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(name) + '&background=021226&color=D4AF37&size=400&font-size=0.35&bold=true';
         
         if(!name || !role) return alert("Por favor, llena el nombre y el cargo.");
         
@@ -807,7 +807,7 @@
                     <img src="${s.img}" class="speaker-img">
                     <div class="speaker-info">
                         <h3>${s.name}</h3><p>${s.role}</p>
-                        <span class="click-hint">Toca para ver información</span>
+                        <span class="click-hint">Ver Perfil Completo <span>→</span></span>
                         ${isAdmin ? `<button class="btn-admin" onclick="deleteItem('Expositores', '${s.id}')">Borrar Global</button>` : ''}
                     </div>
                 </div>`;
