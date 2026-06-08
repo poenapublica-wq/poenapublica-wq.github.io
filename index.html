@@ -342,6 +342,68 @@
     transition: 0.3s; margin-left: 5px;
 }
 .btn-admin-edit { background: rgba(212, 175, 55, 0.1); color: #b49129; }
+    /* ===================================================
+           OVERRIDE: NUEVO CRONOGRAMA PREMIUM (TIMELINE VERTICAL)
+           =================================================== */
+        .agenda-container {
+            position: relative !important;
+            padding: 20px 0 !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+        /* La línea vertical unificadora */
+        .agenda-container::before {
+            content: ''; position: absolute;
+            top: 0; bottom: 0; left: 25px; width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--gold-primary), transparent);
+        }
+        .agenda-item {
+            display: block !important; position: relative !important;
+            padding: 0 0 0 60px !important; margin-bottom: 40px !important;
+            border: none !important; background: transparent !important;
+        }
+        .agenda-item:hover {
+            transform: translateX(5px) !important; background: transparent !important;
+            border: none !important; padding-left: 60px !important;
+        }
+        /* El punto perfecto en la línea */
+        .agenda-item::before {
+            content: ''; position: absolute;
+            left: 17px; top: 6px; width: 14px; height: 14px;
+            background: var(--bg-dark); border: 3px solid var(--gold-primary);
+            border-radius: 50%; box-shadow: 0 0 10px rgba(212, 175, 55, 0.4); z-index: 2;
+        }
+        .agenda-time {
+            display: block !important; text-align: left !important;
+            padding: 0 0 8px 0 !important; min-width: auto !important;
+            font-family: 'Playfair Display', serif !important; font-size: 1.3rem !important;
+            color: var(--gold-primary) !important; letter-spacing: 0.5px !important;
+        }
+        .agenda-time::after { display: none !important; /* Apagar el punto viejo roto */ }
+        
+        /* La nueva tarjeta editorial */
+        .agenda-content {
+            background: var(--white) !important; padding: 25px !important;
+            border-radius: 0 16px 16px 16px !important; /* Esquina superior recta elegante */
+            border-left: none !important; border-top: 3px solid var(--gold-primary) !important;
+            box-shadow: var(--shadow-elegant) !important; margin-left: 0 !important;
+        }
+        .agenda-content::before { display: none !important; /* Apagar la línea vieja rota */ }
+        
+        .agenda-content h4 {
+            margin: 0 !important; font-size: 1.05rem !important;
+            color: var(--bg-dark) !important; line-height: 1.6 !important;
+        }
+        
+        /* Ajuste milimétrico para celulares */
+        @media (max-width: 768px) {
+            .agenda-container::before { left: 15px; }
+            .agenda-item { padding: 0 0 0 45px !important; }
+            .agenda-item:hover { padding-left: 45px !important; }
+            .agenda-item::before { left: 7px; top: 4px; }
+            .agenda-time { font-size: 1.15rem !important; }
+        }
     </style>
 </head>
 <body>
