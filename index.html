@@ -478,7 +478,9 @@
      <button class="btn-add-admin admin-only" style="display:none; background:var(--bg-dark); color:var(--gold-light); margin-top:30px;" onclick="abrirModalAgenda()"> AGREGAR BLOQUE A LA AGENDA</button>
     </div>
 </section>
-
+<div style="text-align: center; margin-top: 20px;">
+        <button class="btn-admin" style="background: transparent; color: var(--gold-primary); border: 1px solid var(--gold-primary); padding: 10px 20px;" onclick="openModal('modalLexicon')">📚 Consultar "Legal Lexicon" (Glosario)</button>
+    </div>
 <!-- SECCIÓN PREGUNTAS -->
 <section id="preguntas" class="seccion">
     <h2 class="titulo-sec">Foro de Preguntas</h2>
@@ -486,7 +488,11 @@
     <div class="qa-container" style="display: flex; justify-content: center; flex-wrap: wrap;">
         <div class="form-panel fade-in-element" style="width: 100%; max-width: 600px;">
             <h3 style="margin-top:0; color: var(--bg-dark); font-family: 'Playfair Display', serif; font-size:1.8rem;">Enviar Pregunta</h3>
-            <p style="font-size: 0.95rem; color: #666; margin-bottom: 25px;">Las consultas serán leídas por el moderador en vivo.</p>
+            <p style="font-size: 0.95rem; color: #666; margin-bottom: 10px;">Las consultas serán leídas por el moderador en vivo.</p>
+            <div style="background: rgba(212, 175, 55, 0.08); border-left: 3px solid var(--gold-primary); padding: 12px 18px; border-radius: 0 8px 8px 0; margin-bottom: 25px;">
+                <strong style="color: var(--gold-primary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">💡 Sugerencia Académica</strong>
+                <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #475569; line-height: 1.5;">Invitamos a los participantes a formular sus interrogantes integrando la terminología técnica abordada en sala (ej. <i>Expert witness, Burden of proof, Chain of custody</i>).</p>
+            </div>
             <div class="form-group">
             <label>Tu Nombre (Opcional)</label>
             <input type="text" id="qName" placeholder="Escribe tu nombre aquí..." autocomplete="off">
@@ -569,7 +575,30 @@
         </div>
     </div>
 </div>
+<!-- MODAL LEGAL LEXICON (EJE TRANSVERSAL) -->
+<div class="modal-overlay" id="modalLexicon" onclick="closeModals(event)">
+    <div class="modal-content">
+        <h2 class="modal-title">Legal Lexicon</h2>
+        <p style="margin-top: -15px; color: #64748b; font-size: 0.9rem; margin-bottom: 25px;">Términos técnicos en inglés aplicados a la prueba pericial y documental (Ley 402 de 2023).</p>
+        
+        <div style="margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px;">
+            <h4 style="color: var(--bg-dark); margin: 0 0 5px 0;">⚖️ Burden of Proof <span style="color: var(--gold-primary); font-size: 0.8em; font-weight: normal;">(Carga de la Prueba)</span></h4>
+            <p style="margin: 0; font-size: 0.9rem; color: #475569;">Obligación procesal de demostrar los hechos que fundamentan la pretensión, pilar en la valoración de la prueba documental.</p>
+        </div>
 
+        <div style="margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px;">
+            <h4 style="color: var(--bg-dark); margin: 0 0 5px 0;">🔬 Expert Witness <span style="color: var(--gold-primary); font-size: 0.8em; font-weight: normal;">(Perito / Testigo Experto)</span></h4>
+            <p style="margin: 0; font-size: 0.9rem; color: #475569;">Profesional calificado que rinde su experticia en el proceso, sometiéndose al contrainterrogatorio de las partes.</p>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <h4 style="color: var(--bg-dark); margin: 0 0 5px 0;">🔗 Chain of Custody <span style="color: var(--gold-primary); font-size: 0.8em; font-weight: normal;">(Cadena de Custodia)</span></h4>
+            <p style="margin: 0; font-size: 0.9rem; color: #475569;">Procedimiento que garantiza la integridad y autenticidad de la evidencia desde su recolección hasta su presentación en audiencia.</p>
+        </div>
+
+        <button class="btn-gold" style="margin-top: 20px;" onclick="closeModals('force')">Cerrar Glosario</button>
+    </div>
+</div>
 <script>
     // --- CONTROLADOR DE TARJETAS DE PERFIL ---
     function setRole(value, element) {
